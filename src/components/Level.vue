@@ -38,28 +38,20 @@ const drawLevel = (level) => {
   const rows = 13;
   const tileSize = columns;
 
-  const sprites = [
-    "💩",
-    "⬛",
-    "◻️",
-    "🐍"
-  ];
+  const sprites = {
+    "snake": "🐍",
+    "turtle": "🐢",
+    "gorilla": "🦍",
+    "tiger": "🐅"
+  }
 
   level.level.map((tile) => {
     tiles.push({
-      type: tile.content ? tile.content.isPlayer ? "🏃": tile.content.monsterType === "turtle"? "🐢" : "🐍" : tile.isWall ? "⬛" : "🍃",
+      type: tile.content ? tile.content.isPlayer ? "🏃": sprites[tile.content.monsterType] : tile.isWall ? "⬛" : "🍃",
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })
   })
-
-  /* for (let i = 0; i < rows * columns; i++) {
-    tiles.push({
-      type: sprites[Math.floor(Math.random() * sprites.length)],
-      x: (i % columns) * (100 / columns),
-      y: Math.floor(i / columns) * (100 / rows)
-    });
-  }*/
 
   return tiles;
 };
