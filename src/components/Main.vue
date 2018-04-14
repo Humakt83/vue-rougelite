@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <div class="mapArea">
-      <Map />
+    <div class="levelArea">
+      <Level :level="game.level" />
     </div>
     <div class="infoArea">
       <Info />
@@ -14,13 +14,18 @@
 
 <script>
 
-import Map from './Map';
+
+import Level from './Level';
 import Info from './info/Info';
 import Log from './Log';
+import Game from '../logic/game';
 
 export default {
+  data:() => {
+    return {game: Game()}
+  },
   components: {
-    Map,
+    Level,
     Info,
     Log
   }
@@ -30,7 +35,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .mapArea, .infoArea {
+  .levelArea, .infoArea {
     width: 75%;
     min-height: 75%;
     border: 2px solid black;

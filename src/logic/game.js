@@ -1,15 +1,15 @@
 import Player from '../objects/player';
-import Map from '../objects/map';
+import Level from '../objects/level';
 
 export default () => {
   const player = Player();
-  const map = Map(30, 13, player);
+  const level = Level(30, 13, player);
   const move = (direction) => {
     return direction;
   };
-  console.log(map.getPlayerPosition());
+  console.log(level.getPlayerPosition());
   return {
-    map: map,
+    level: level,
     move: move 
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="map">
+  <div class="level">
     <span class="tile" v-for="(tile, index) in tiles"  
     :x="tile.type" 
     :y="tile.type" 
@@ -20,13 +20,13 @@ const Tile = {
   template: "{{ tile.type }}"
 };
 
-const generateMapData = () => {
+const generateLevelData = () => {
   const tiles = [];
   const columns = 30
   const rows = 13
   const tileSize = columns
 
-  const sprites = ["⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️", "⬛",  "◻️", "🐍"]
+  const sprites = ["⬛", "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️", "⬛",  "◻️", "🐍"]
 
   for (let i = 0; i < rows*columns; i++) {
     tiles.push({ type: sprites[Math.floor(Math.random()*sprites.length)], 
@@ -39,19 +39,14 @@ const generateMapData = () => {
 };
 
 export default {
-  name: "Map",
+  name: "Level",
   props: {
-    msg: String
   },
   components: {
     tile: Tile
   },
   data() {
-    /*return {tiles: [
-      { type: '#' },
-      { type: 'H' }
-    ]}*/
-    return generateMapData();
+    return generateLevelData();
   }
 };
 </script>
@@ -72,7 +67,7 @@ li {
 a {
   color: #42b983;
 }
-.map {
+.level {
   background-color: silver;
   border: solid 2px black;
   position: relative;

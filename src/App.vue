@@ -7,9 +7,6 @@
 
 <script>
 import Main from './components/Main.vue'
-import Game from './logic/game';
-
-Game();
 
 export default {
   name: 'app',
