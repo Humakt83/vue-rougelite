@@ -78,7 +78,8 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
 export default () => {
   return {
     level: level,
-    move: move
+    move: move,
+    player: player
   }
 }
 

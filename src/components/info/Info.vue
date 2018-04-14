@@ -1,7 +1,7 @@
 <template>
   <div class="Info">
     <h3>Info</h3>
-    <Stats />
+    <Stats :player="player"/>
     <Inventory />    
   </div>
 </template>
@@ -10,6 +10,7 @@
 import Inventory from './Inventory';
 import Stats from './Stats';
 export default {
+  props: ['player'],
   components: { Inventory, Stats }
 }
 
