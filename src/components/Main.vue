@@ -1,22 +1,24 @@
 <template>
   <div class="main">
-    <div class="mapArea">
-      <Map />
+    <div class="levelArea">
+      <Level :level="game.level" />
     </div>
     <div class="infoArea">
       <Info />
     </div>
-    <div class="commandArea">
-      <Commands />
+    <div class="logArea">
+      <Log />
     </div>
   </div>
 </template>
 
 <script>
 import Engine from '../Engine'
-import Map from './Map';
-import Info from './Info';
-import Commands from './Commands';
+
+import Level from './Level';
+import Info from './info/Info';
+import Log from './Log';
+import Game from '../logic/game';
 
 
 const keyCommands = {
@@ -27,10 +29,13 @@ const keyCommands = {
 }
 
 export default {
+  data:() => {
+    return {game: Game()}
+  },
   components: {
-    Map,
+    Level,
     Info,
-    Commands
+    Log
   },
   mounted() {
     window.addEventListener('keydown', (e) => {
@@ -51,7 +56,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .mapArea, .infoArea {
+  .levelArea, .infoArea {
     width: 75%;
     min-height: 75%;
     border: 2px solid black;
@@ -66,7 +71,7 @@ export default {
     min-height: 75%;
   }
 
-  .commandArea {
+  .logArea {
     position: absolute;
     left: 0;
     top: 75%;

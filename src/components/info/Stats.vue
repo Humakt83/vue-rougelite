@@ -1,6 +1,6 @@
 <template>
-  <div class="commands">
-    <h1>Commands</h1>
+  <div class="inventory">
+    <h3>Stats</h3>
   </div>
 </template>
 
