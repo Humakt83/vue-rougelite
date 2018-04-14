@@ -60,6 +60,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    margin: -6px;
   }
 
   .infoArea {
@@ -75,6 +76,7 @@ export default {
     width: 100%;
     min-height: 25%;
     border: 2px solid black;
+    margin: -6px;
   }
 
 </style>
