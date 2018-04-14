@@ -1,4 +1,4 @@
-export default class Engine {
+class Engine {
   moveDown() {
     console.log('Move Down');
   }
@@ -12,3 +12,5 @@ export default class Engine {
     console.log('Move Right');
   }
 }
+
+export default new Engine
