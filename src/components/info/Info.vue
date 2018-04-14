@@ -1,12 +1,16 @@
 <template>
-  <div class="commands">
-    <h1>Commands</h1>
+  <div class="Info">
+    <h3>Info</h3>
+    <Stats />
+    <Inventory />    
   </div>
 </template>
 
 <script>
-
+import Inventory from './Inventory';
+import Stats from './Stats';
 export default {
+  components: { Inventory, Stats }
 }
 
 </script>
