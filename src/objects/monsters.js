@@ -13,3 +13,8 @@ export const snake = () => {
 export const turtle = () => {
   return createMonster(3, 10, 30);
 }
+
+export const randomEnemy = () => {
+  const enemies = [turtle, snake];
+  return enemies[Math.floor(Math.random() * enemies.length)]();
+};
