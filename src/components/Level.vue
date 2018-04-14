@@ -31,7 +31,7 @@ const getTile = type => {
 
 }
 
-const generateLevelData = (level) => {
+const drawLevel = (level) => {
   console.log(JSON.stringify(level))
   const tiles = [];
   const columns = 30;
@@ -61,7 +61,7 @@ const generateLevelData = (level) => {
     });
   }*/
 
-  return { tiles: tiles };
+  return tiles;
 };
 
 export default {
@@ -70,10 +70,12 @@ export default {
   components: {
     tile: Tile
   },
-  data() {
-    return generateLevelData(this.level);
+  computed: {
+    tiles(){
+      return drawLevel(this.level)
+    }
   }
-};
+  };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
