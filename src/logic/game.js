@@ -8,7 +8,7 @@ const columns = 30;
 const rows = 13;
 const player = Player();
 const level = Level(columns, rows, player);
-const gameLog = ['Hello World!'];
+const gameLog = ['Welcome to the jungle!'];
 
 const move = (direction) => {
   if (gameOver) {
