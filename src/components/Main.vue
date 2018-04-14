@@ -63,6 +63,11 @@ export default {
     margin: -6px;
   }
 
+  .levelArea {
+    width: calc(75% - 4px);
+    min-height: calc(75% - 4px);
+  }
+
   .infoArea {
     left: 75%;
     width: 25%;

@@ -47,7 +47,7 @@ const drawLevel = (level) => {
 
   level.level.map((tile) => {
     tiles.push({
-      type: tile.content ? tile.content.isPlayer ? "🏃": tile.content.monsterType === "turtle"? "🐢" : "🐍" : tile.isWall ? "⬛" : "🌾",
+      type: tile.content ? tile.content.isPlayer ? "🏃": tile.content.monsterType === "turtle"? "🐢" : "🐍" : tile.isWall ? "⬛" : "🍃",
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })
@@ -95,11 +95,11 @@ a {
   color: #42b983;
 }
 .level {
-  background-color: silver;
+  background-color: lightgreen;
   border: solid 2px black;
   position: relative;
-  width: 75vw;
-  height: 75vh;
+  width: calc(75vw - 4px);
+  height: calc(75vh - 4px);
 }
 .tile {
   border: solid 1px rgba(255, 255, 255, 0.1);
