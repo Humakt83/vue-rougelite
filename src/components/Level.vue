@@ -20,33 +20,58 @@ const Tile = {
   template: "{{ tile.type }}"
 };
 
-const generateLevelData = () => {
-  const tiles = [];
-  const columns = 30
-  const rows = 13
-  const tileSize = columns
+const getTile = type => {
 
-  const sprites = ["⬛", "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️", "⬛",  "◻️", "🐍"]
-
-  for (let i = 0; i < rows*columns; i++) {
-    tiles.push({ type: sprites[Math.floor(Math.random()*sprites.length)], 
-                 x: (i % columns) * (100 / columns), 
-                 y: Math.floor(i/columns) * (100 / rows) 
-                 });
+  switch (type) {
+    case "floor":
+      return "◻️";  
+    default:
+      return "⬛";
   }
+
+}
+
+const generateLevelData = (level) => {
+  console.log(JSON.stringify(level))
+  const tiles = [];
+  const columns = 30;
+  const rows = 13;
+  const tileSize = columns;
+
+  const sprites = [
+    "💩",
+    "⬛",
+    "◻️",
+    "🐍"
+  ];
+
+  level.level.map((tile) => {
+    tiles.push({
+      type: getTile(tile.tileType),
+      x: tile.x * (100 / columns),
+      y: tile.y * (100 / rows)
+    })
+  })
+
+  /* for (let i = 0; i < rows * columns; i++) {
+    tiles.push({
+      type: sprites[Math.floor(Math.random() * sprites.length)],
+      x: (i % columns) * (100 / columns),
+      y: Math.floor(i / columns) * (100 / rows)
+    });
+  }*/
 
   return { tiles: tiles };
 };
 
 export default {
   name: "Level",
-  props: {
-  },
+  props: ['level'],
   components: {
     tile: Tile
   },
   data() {
-    return generateLevelData();
+    return generateLevelData(this.level);
   }
 };
 </script>
@@ -75,7 +100,7 @@ a {
   height: 75vh;
 }
 .tile {
-  border: solid 1px rgba(255, 255, 255, .1);
+  border: solid 1px rgba(255, 255, 255, 0.1);
   position: absolute;
   width: 1px;
   height: 1px;
@@ -86,7 +111,7 @@ a {
   margin: 0;
   padding: 0;
   vertical-align: top;
-  line-height: 10px;
+  line-height: 1em;
   user-select: none;
 }
 </style>
