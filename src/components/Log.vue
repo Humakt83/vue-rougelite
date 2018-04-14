@@ -29,6 +29,7 @@ export default {
     width: 98%;
     height: 25vh;
     position: relative;
+    font-size: 16px;
   }
   .logArea:disabled {
     color: black;
