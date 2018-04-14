@@ -1,17 +1,18 @@
-const createMonster = (attack, defense, health) => {
+const createMonster = (attack, defense, health, monsterType) => {
   return {
     attack: attack,
     defense: defense,
-    health: health
+    health: health,
+    monsterType: monsterType
   }
 }
 
 export const snake = () => {
-  return createMonster(10, 1, 20);
+  return createMonster(10, 1, 20, "snake");
 }
 
 export const turtle = () => {
-  return createMonster(3, 10, 30);
+  return createMonster(3, 10, 30, "turtle");
 }
 
 export const randomEnemy = () => {
