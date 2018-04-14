@@ -2,6 +2,33 @@ import Player from '../objects/player';
 import Level from '../objects/level';
 import combat from './combat'; 
 
+let gameOver = false;
+
+const columns = 30;
+const rows = 13;
+const player = Player();
+const level = Level(columns, rows, player);
+
+const move = (direction) => {
+  if (gameOver) {
+    alert('Game over!');
+    return;
+  }
+  const playerPosition = level.getPlayerPosition();
+  if (direction === 'left' && playerPosition.x > 0) {
+    handleMoveAction(level, player, playerPosition, -1, 0);
+  }
+  if (direction === 'right' && playerPosition.x < columns - 1) {
+    handleMoveAction(level, player, playerPosition, 1, 0);
+  }
+  if (direction === 'down' && playerPosition.y < rows - 1) {
+    handleMoveAction(level, player, playerPosition, 0, 1);
+  }
+  if (direction === 'up' && playerPosition.y > 0) {
+    handleMoveAction(level, player, playerPosition, 0, -1);
+  }
+};
+
 const canMoveToTile = (tileToMove) => {
   return !tileToMove.isWall && !tileToMove.content;
 }
@@ -24,6 +51,12 @@ const monstersTurn = (level) => {
     const tileToMove = level.getTile(position.x + xAdjustment, position.y + yAdjustment);
     if (tileToMove && canMoveToTile(tileToMove)) {
       moveToTile(position, tileToMove);
+    } else if (tileToMove && containsAttackable(tileToMove) && tileToMove.content.isPlayer) {
+      combat(position.content, tileToMove.content);
+      if (tileToMove.content.health <= 0) {
+        tileToMove.content = undefined;
+        gameOver = true;
+      }
     }
   });
 }
@@ -43,28 +76,10 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
 }
 
 export default () => {
-  const columns = 30;
-  const rows = 13;
-  const player = Player();
-  const level = Level(columns, rows, player);
-  const move = (direction) => {
-    const playerPosition = level.getPlayerPosition();
-    if (direction === 'left' && playerPosition.x > 0) {
-      handleMoveAction(level, player, playerPosition, -1, 0);
-    }
-    if (direction === 'right' && playerPosition.x < columns - 1) {
-      handleMoveAction(level, player, playerPosition, 1, 0);
-    }
-    if (direction === 'down' && playerPosition.y < rows - 1) {
-      handleMoveAction(level, player, playerPosition, 0, 1);
-    }
-    if (direction === 'up' && playerPosition.y > 0) {
-      handleMoveAction(level, player, playerPosition, 0, -1);
-    }
-  };
   return {
     level: level,
-    move: move 
+    move: move,
+    player: player
   }
 }
 

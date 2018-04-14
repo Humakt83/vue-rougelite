@@ -4,7 +4,7 @@
       <Level :level="game.level" />
     </div>
     <div class="infoArea">
-      <Info />
+      <Info :player="game.player"/>
     </div>
     <div class="logArea">
       <Log />
