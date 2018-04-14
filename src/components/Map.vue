@@ -4,7 +4,7 @@
     :x="tile.type" 
     :y="tile.type" 
     v-bind:key="index"
-    v-bind:style="{left: tile.x + 'px', top: tile.y + 'px' }">
+    v-bind:style="{left: tile.x + '%', top: tile.y + '%' }">
       {{ tile.type }}
     </span>
   </div>
@@ -22,13 +22,17 @@ const Tile = {
 
 const generateMapData = () => {
   const tiles = [];
-  const columns = 20
-  const tileSize = 30
+  const columns = 30
+  const rows = 13
+  const tileSize = columns
 
-  for (let i = 0; i < 100; i++) {
-    tiles.push({ type: "B", 
-                 x: (i % columns) * tileSize, 
-                 y: Math.floor(i/columns) * tileSize });
+  const sprites = ["⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️","⬛",  "◻️", "◻️", "◻️", "⬛",  "◻️", "🐍"]
+
+  for (let i = 0; i < rows*columns; i++) {
+    tiles.push({ type: sprites[Math.floor(Math.random()*sprites.length)], 
+                 x: (i % columns) * (100 / columns), 
+                 y: Math.floor(i/columns) * (100 / rows) 
+                 });
   }
 
   return { tiles: tiles };
@@ -69,18 +73,25 @@ a {
   color: #42b983;
 }
 .map {
-  background-color: gray;
+  background-color: silver;
   border: solid 2px black;
   position: relative;
-  width: 800px;
-  height: 400px;
+  width: 75vw;
+  height: 75vh;
 }
 .tile {
   border: solid 1px rgba(255, 255, 255, .1);
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 1px;
+  height: 1px;
   left: 0px;
   top: 0px;
+  font-size: calc(75vh / 13);
+  transform: scale(calc(2 * (13 / 30)), 1.1);
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  line-height: 10px;
+  user-select: none;
 }
 </style>
