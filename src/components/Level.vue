@@ -47,7 +47,7 @@ const generateLevelData = (level) => {
 
   level.level.map((tile) => {
     tiles.push({
-      type: tile.isWall ? "⬛":"◻️",
+      type: tile.content ? tile.content.isPlayer ? "🏃": "🐍" : tile.isWall ? "⬛" : "◻️",
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })

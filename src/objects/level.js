@@ -7,7 +7,7 @@ const createTile = (x, y, wall) => {
     content: undefined,
     x: x,
     y: y,
-    isWall: wall
+    isWall: !!wall
   }
 }
 
