@@ -36,6 +36,8 @@ export default () => {
     if (direction === 'up' && playerPosition.y > 0) {
       handleMoveAction(level, player, playerPosition, 0, -1);
     }
+    const newPosition = level.getPlayerPosition();
+    console.log(`${newPosition.x}, ${newPosition.y}`);
   };
   return {
     level: level,

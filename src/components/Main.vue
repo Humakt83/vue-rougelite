@@ -13,42 +13,39 @@
 </template>
 
 <script>
-import Engine from '../Engine'
-
 import Level from './Level';
 import Info from './info/Info';
 import Log from './Log';
 import Game from '../logic/game';
 
+const game = Game();
 
 const keyCommands = {
-  'ArrowLeft': Engine.moveLeft,
-  'ArrowRight': Engine.moveRight,
-  'ArrowUp': Engine.moveUp,
-  'ArrowDown': Engine.moveDown,
+  'ArrowLeft': () => game.move('left'),
+  'ArrowRight': () => game.move('right'),
+  'ArrowUp': () => game.move('up'),
+  'ArrowDown': () => game.move('down'),
 }
+
+window.addEventListener('keydown', (e) => {
+  const {key, shiftKey, ctrlKey, altKey} = e
+
+  const modifiers = shiftKey || ctrlKey || altKey
+
+  if (!modifiers && keyCommands.hasOwnProperty(key) && typeof keyCommands[key] === 'function') {
+    const cmd = keyCommands[key]
+    cmd()
+  }
+})
 
 export default {
   data:() => {
-    return {game: Game()}
+    return {game: game}
   },
   components: {
     Level,
     Info,
     Log
-  },
-  mounted() {
-    window.addEventListener('keydown', (e) => {
-      const {key, shiftKey, ctrlKey, altKey} = e
-
-      const modifiers = shiftKey || ctrlKey || altKey
-
-      if (!modifiers && keyCommands.hasOwnProperty(key) && typeof keyCommands[key] === 'function') {
-        const cmd = keyCommands[key]
-
-        cmd()
-      }
-    })
   }
 }
 
