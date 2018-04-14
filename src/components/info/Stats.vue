@@ -5,6 +5,7 @@
       <li>Health: {{player.health}}</li>
       <li>Attack: {{player.attack}}</li>
       <li>Defense: {{player.defense}}</li>
+      <li>Damage: {{player.minDamage}}-{{player.maxDamage}}</li>
     </ul>
   </div>
 </template>
