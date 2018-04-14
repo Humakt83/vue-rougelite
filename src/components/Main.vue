@@ -7,7 +7,7 @@
       <Info :player="game.player"/>
     </div>
     <div class="logArea">
-      <Log />
+      <Log :gameLog="game.gameLog"/>
     </div>
   </div>
 </template>

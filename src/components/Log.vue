@@ -1,17 +1,32 @@
 <template>
   <div class="log">
-    <h2>Log</h2>
+    <textarea class="logArea" disabled v-model="logToString">
+    </textarea>
   </div>
 </template>
 
 <script>
 
 export default {
-  
+  props: ['gameLog'],
+  computed: {
+    logToString() {
+      let converted = ''
+      this.gameLog.forEach(logEntry => {
+        converted += logEntry;
+        converted += '\n';
+      })
+      return converted;
+    }
+  }
 }
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+  .logArea {
+    width: 100%;
+    height: 100%;
+  }
 </style>

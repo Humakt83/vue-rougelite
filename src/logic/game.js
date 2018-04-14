@@ -8,6 +8,7 @@ const columns = 30;
 const rows = 13;
 const player = Player();
 const level = Level(columns, rows, player);
+const gameLog = ['Hello World!'];
 
 const move = (direction) => {
   if (gameOver) {
@@ -51,10 +52,11 @@ const monstersTurn = (level) => {
     if (tileToMove && canMoveToTile(tileToMove)) {
       moveToTile(position, tileToMove);
     } else if (tileToMove && containsAttackable(tileToMove) && tileToMove.content.isPlayer) {
-      combat(position.content, tileToMove.content);
+      combat(position.content, tileToMove.content, gameLog);
       if (tileToMove.content.health <= 0) {
         tileToMove.content = undefined;
         gameOver = true;
+        gameLog.unshift('GAME OVER!!!');
       }
     }
   });
@@ -66,10 +68,13 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
     moveToTile(playerPosition, tileToMove);
     monstersTurn(level);
   } else if (containsAttackable(tileToMove)) {
-    combat(player, tileToMove.content);
-    if (tileToMove.content.health <= 0) {
+    combat(player, tileToMove.content, gameLog);
+    const opponent = tileToMove.content;
+    if (opponent.health <= 0) {
+      gameLog.unshift(`Monstrous ${opponent.monsterType} defeated. Gained ${opponent.experience} experience.` );
       player.experience += tileToMove.content.experience;
       if (player.experience >= 1000) {
+        gameLog.unshift('Congratulations, you gained level!');
         player.level++;
         player.maxHealth += 10;
         player.attack++;
@@ -88,7 +93,8 @@ export default () => {
   return {
     level: level,
     move: move,
-    player: player
+    player: player,
+    gameLog: gameLog
   }
 }
 
