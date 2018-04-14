@@ -11,7 +11,6 @@ const level = Level(columns, rows, player);
 
 const move = (direction) => {
   if (gameOver) {
-    alert('Game over!');
     return;
   }
   const playerPosition = level.getPlayerPosition();
