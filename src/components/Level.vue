@@ -32,13 +32,13 @@ const getTile = type => {
 }
 
 const getTileType = (tile) => {
+        if(tile.isWall){
+          return "🌳"
+        }
         if(!tile.content){
           return "🍃"
         }
 
-        if(tile.isWall){
-          return "🌳"
-        }
 
         if(tile.content.isPlayer){
           return "🏃"
@@ -75,10 +75,6 @@ const drawLevel = (level) => {
   }
 
   level.level.map((tile) => {
-    
-    if(tile.isWall){
-      console.log("On seinä");
-    }
     tiles.push({
       type: getTileType(tile),
       x: tile.x * (100 / columns),
