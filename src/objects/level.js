@@ -21,7 +21,8 @@ const place = (level, enemy, weapon, armor, columns, rows) => {
   const x = Math.floor(Math.random() * columns);
   const y = Math.floor(Math.random() * rows);
   const tile = getTile(level, x, y);
-  if (tile.tileType !== 'wall' && !tile.content) {
+
+  if (!tile.isWall && !tile.content) {
 
     var n = Math.floor(Math.random() * 100)
     switch (n) {
@@ -41,17 +42,25 @@ const place = (level, enemy, weapon, armor, columns, rows) => {
 
 export default (columns, rows, player) => {
   const numberOfEnemies = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
+  const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
   const level = [];
+  
   for (let x = 0; x < columns; x++) {
     for (let y = 0; y < rows; y++) {
       level.push(createTile(x, y))
     }
   }
+
+  for (let i = 0; i < numberOfWalls; i++) {
+    level[Math.floor(Math.random()*level.length)].isWall = true;
+  }
+
   getTile(level, 1, 1).content = player;
   for (let i = 0; i < numberOfEnemies; i++) {
     place(level, randomEnemy(), randomWeapon(), randomArmor(), columns, rows);
   }
 
+  
   const getPlayerPosition = () => {
     return _.chain(level).find(tile => tile.content && !!tile.content.isPlayer).value();
   }

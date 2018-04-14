@@ -31,21 +31,21 @@ const getTile = type => {
 
 }
 
-const getTileType = (content) => {
-        if(!content){
+const getTileType = (tile) => {
+        if(!tile.content){
           return "🍃"
         }
 
-        if(content.isWall){
-          return "⬛"
+        if(tile.isWall){
+          return "🌳"
         }
 
-        if(content.isPlayer){
+        if(tile.content.isPlayer){
           return "🏃"
         }
 
-        if(content.monsterType){
-          switch (content.monsterType) {
+        if(tile.content.monsterType){
+          switch (tile.content.monsterType) {
             case "turtle":
               return "🐢";          
             case "snake":
@@ -61,7 +61,7 @@ const getTileType = (content) => {
 }
 
 const drawLevel = (level) => {
-  console.log(JSON.stringify(level))
+  // console.log(JSON.stringify(level))
   const tiles = [];
   const columns = 30;
   const rows = 13;
@@ -75,8 +75,12 @@ const drawLevel = (level) => {
   }
 
   level.level.map((tile) => {
+    
+    if(tile.isWall){
+      console.log("On seinä");
+    }
     tiles.push({
-      type: getTileType(tile.content),
+      type: getTileType(tile),
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })
