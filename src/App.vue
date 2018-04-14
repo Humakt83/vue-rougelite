@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     @@@ ROGUE @@@
-    <Map />
+    <Main />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Map from './components/Map.vue'
+import Main from './components/Main.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
-    Map
+    Main
   }
 }
 </script>
