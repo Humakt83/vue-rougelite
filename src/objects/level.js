@@ -36,7 +36,7 @@ export default (columns, rows, player) => {
   }
   getTile(level, 1, 1).content = player;
   for (let i = 0; i < numberOfEnemies; i++) {
-    place(level, randomEnemy, columns, rows);
+    place(level, randomEnemy(), columns, rows);
   }
 
   const getPlayerPosition = () => {
