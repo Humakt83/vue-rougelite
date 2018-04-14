@@ -24,7 +24,7 @@ const getTile = type => {
 
   switch (type) {
     case "floor":
-      return "◻️";  
+      return "🔳";  
     default:
       return "⬛";
   }
@@ -47,7 +47,7 @@ const drawLevel = (level) => {
 
   level.level.map((tile) => {
     tiles.push({
-      type: tile.content ? tile.content.isPlayer ? "🏃": tile.content.monsterType === "turtle"? "🐢" : "🐍" : tile.isWall ? "⬛" : "◻️",
+      type: tile.content ? tile.content.isPlayer ? "🏃": tile.content.monsterType === "turtle"? "🐢" : "🐍" : tile.isWall ? "⬛" : "🌾",
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })
