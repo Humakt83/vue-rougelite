@@ -36,26 +36,27 @@ const getTileType = (content) => {
           return "🍃"
         }
 
-        if(tile.isWall){
+        if(content.isWall){
           return "⬛"
         }
 
-        if(tile.content.isPlayer){
+        if(content.isPlayer){
           return "🏃"
         }
 
-        if(tile.content.monsterType){
-          switch (tile.content.monsterType) {
+        if(content.monsterType){
+          switch (content.monsterType) {
             case "turtle":
-              return "🐢";
-          
+              return "🐢";          
             case "snake":
               return "🐍";
-          
+            case "tiger":
+              return "🐅";
+            case "gorilla":
+              return "🐒";
             default:
               return "💩";
           }
-
         }
 }
 
