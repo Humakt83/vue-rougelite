@@ -6,8 +6,8 @@
     <div class="infoArea">
       <Info />
     </div>
-    <div class="commandArea">
-      <Commands />
+    <div class="logArea">
+      <Log />
     </div>
   </div>
 </template>
@@ -15,14 +15,14 @@
 <script>
 
 import Map from './Map';
-import Info from './Info';
-import Commands from './Commands';
+import Info from './info/Info';
+import Log from './Log';
 
 export default {
   components: {
     Map,
     Info,
-    Commands
+    Log
   }
 }
 
@@ -45,7 +45,7 @@ export default {
     min-height: 75%;
   }
 
-  .commandArea {
+  .logArea {
     position: absolute;
     left: 0;
     top: 75%;
