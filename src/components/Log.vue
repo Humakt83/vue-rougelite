@@ -26,7 +26,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .logArea {
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: 25vh;
+    position: relative;
+  }
+  .logArea:disabled {
+    color: black;
   }
 </style>
