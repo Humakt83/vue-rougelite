@@ -2,9 +2,11 @@
   <div class="inventory">
     <h3>Stats</h3>
     <ul>
+      <li>Level: {{player.level}} ({{player.experience}}/1000)</li>
       <li>Health: {{player.health}}</li>
       <li>Attack: {{player.attack}}</li>
       <li>Defense: {{player.defense}}</li>
+      <li>Damage: {{player.minDamage}}-{{player.maxDamage}}</li>
     </ul>
   </div>
 </template>

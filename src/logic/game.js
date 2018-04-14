@@ -11,7 +11,6 @@ const level = Level(columns, rows, player);
 
 const move = (direction) => {
   if (gameOver) {
-    alert('Game over!');
     return;
   }
   const playerPosition = level.getPlayerPosition();
@@ -69,6 +68,16 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
   } else if (containsAttackable(tileToMove)) {
     combat(player, tileToMove.content);
     if (tileToMove.content.health <= 0) {
+      player.experience += tileToMove.content.experience;
+      if (player.experience >= 1000) {
+        player.level++;
+        player.maxHealth += 10;
+        player.attack++;
+        player.defense++;
+        player.health = player.maxHealth;
+        player.maxDamage++;
+        player.experience -= 1000;
+      }
       tileToMove.content = undefined;
     }
     monstersTurn(level);

@@ -1,8 +1,13 @@
 <template>
   <div class="Info">
     <h3>Info</h3>
-    <Stats :player="player"/>
-    <Inventory />    
+    <template v-if="player.health > 0">
+      <Stats :player="player"/>
+      <Inventory />    
+    </template>
+    <template v-else>
+      <h1>DÖÖD</h1>
+    </template>
   </div>
 </template>
 

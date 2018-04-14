@@ -66,12 +66,12 @@ const drawLevel = (level) => {
   const rows = 13;
   const tileSize = columns;
 
-  const sprites = [
-    "💩",
-    "⬛",
-    "◻️",
-    "🐍"
-  ];
+  const sprites = {
+    "snake": "🐍",
+    "turtle": "🐢",
+    "gorilla": "🦍",
+    "tiger": "🐅"
+  }
 
   level.level.map((tile) => {
     tiles.push({
@@ -80,14 +80,6 @@ const drawLevel = (level) => {
       y: tile.y * (100 / rows)
     })
   })
-
-  /* for (let i = 0; i < rows * columns; i++) {
-    tiles.push({
-      type: sprites[Math.floor(Math.random() * sprites.length)],
-      x: (i % columns) * (100 / columns),
-      y: Math.floor(i / columns) * (100 / rows)
-    });
-  }*/
 
   return tiles;
 };
