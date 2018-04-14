@@ -13,12 +13,20 @@
 </template>
 
 <script>
-
+import Engine from '../Engine'
 
 import Level from './Level';
 import Info from './info/Info';
 import Log from './Log';
 import Game from '../logic/game';
+
+
+const keyCommands = {
+  'ArrowLeft': Engine.moveLeft,
+  'ArrowRight': Engine.moveRight,
+  'ArrowUp': Engine.moveUp,
+  'ArrowDown': Engine.moveDown,
+}
 
 export default {
   data:() => {
@@ -28,6 +36,19 @@ export default {
     Level,
     Info,
     Log
+  },
+  mounted() {
+    window.addEventListener('keydown', (e) => {
+      const {key, shiftKey, ctrlKey, altKey} = e
+
+      const modifiers = shiftKey || ctrlKey || altKey
+
+      if (!modifiers && keyCommands.hasOwnProperty(key) && typeof keyCommands[key] === 'function') {
+        const cmd = keyCommands[key]
+
+        cmd()
+      }
+    })
   }
 }
 
