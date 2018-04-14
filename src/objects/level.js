@@ -4,10 +4,10 @@ import { randomEnemy } from './monsters';
 
 const createTile = (x, y, wall) => {
   return {
-    tileType: wall ? 'wall' : 'floor',
     content: undefined,
     x: x,
-    y: y
+    y: y,
+    isWall: wall
   }
 }
 
@@ -45,6 +45,7 @@ export default (columns, rows, player) => {
 
   return {
     level: level,
-    getPlayerPosition: getPlayerPosition
+    getPlayerPosition: getPlayerPosition,
+    getTile: (x, y) => getTile(level, x, y)
   }
 };
