@@ -31,8 +31,36 @@ const getTile = type => {
 
 }
 
+const getTileType = (content) => {
+        if(!content){
+          return "🍃"
+        }
+
+        if(tile.isWall){
+          return "⬛"
+        }
+
+        if(tile.content.isPlayer){
+          return "🏃"
+        }
+
+        if(tile.content.monsterType){
+          switch (tile.content.monsterType) {
+            case "turtle":
+              return "🐢";
+          
+            case "snake":
+              return "🐍";
+          
+            default:
+              return "💩";
+          }
+
+        }
+}
+
 const drawLevel = (level) => {
-  // console.log(JSON.stringify(level))
+  console.log(JSON.stringify(level))
   const tiles = [];
   const columns = 30;
   const rows = 13;
@@ -47,7 +75,7 @@ const drawLevel = (level) => {
 
   level.level.map((tile) => {
     tiles.push({
-      type: tile.content ? tile.content.isPlayer ? "🏃": tile.content.monsterType === "turtle"? "🐢" : "🐍" : tile.isWall ? "⬛" : "🍃",
+      type: getTileType(tile.content),
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })

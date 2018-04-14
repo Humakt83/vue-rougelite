@@ -12,3 +12,8 @@ export const axe = () => {
     itemType: 'weapon'
   }
 }
+
+export const randomWeapon = () => {
+  const weapons = [sword, axe];
+  return weapons[Math.floor(Math.random() * weapons.length)]();
+};

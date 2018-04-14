@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 
 import { randomEnemy } from './monsters';
+import { randomWeapon } from './weapons';
+import { randomArmor } from './armor';
 
 const createTile = (x, y, wall) => {
   return {
@@ -15,14 +17,25 @@ const getTile = (level, x, y) => {
   return level.find(tile => tile.x === x && tile.y === y);
 }
 
-const place = (level, item, columns, rows) => {
+const place = (level, enemy, weapon, armor, columns, rows) => {
   const x = Math.floor(Math.random() * columns);
   const y = Math.floor(Math.random() * rows);
   const tile = getTile(level, x, y);
   if (tile.tileType !== 'wall' && !tile.content) {
-    tile.content = item;
+
+    var n = Math.floor(Math.random() * 100)
+    switch (n) {
+      case n < 10:
+        tile.content = weapon;
+      case n < 15:
+        tile.content = armor;
+      default:
+        tile.content = enemy;
+    }
+
+
   } else {
-    place(level, item, columns, rows);
+    place(level, enemy, weapon, armor, columns, rows);
   }
 }
 
@@ -36,7 +49,7 @@ export default (columns, rows, player) => {
   }
   getTile(level, 1, 1).content = player;
   for (let i = 0; i < numberOfEnemies; i++) {
-    place(level, randomEnemy(), columns, rows);
+    place(level, randomEnemy(), randomWeapon(), randomArmor(), columns, rows);
   }
 
   const getPlayerPosition = () => {

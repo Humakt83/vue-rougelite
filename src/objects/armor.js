@@ -53,3 +53,8 @@ export const boots = () => {
     slot: 'shield'
   }
 }
+
+export const randomArmor = () => {
+  const armors = [platemail, helmet, boots];
+  return armors[Math.floor(Math.random() * armors.length)]();
+};
