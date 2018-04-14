@@ -1,8 +1,13 @@
 import Player from '../objects/player';
 import Level from '../objects/level';
+import combat from './combat'; 
 
 const canMoveToTile = (tileToMove) => {
   return !tileToMove.isWall && !tileToMove.content;
+}
+
+const containsAttackable = (tile) => {
+  return tile.content && tile.content.health;
 }
 
 const movePlayerToTile = (playerPosition, tileToMove, player) => {
@@ -14,6 +19,8 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
   const tileToMove = level.getTile(playerPosition.x + xAdjustment, playerPosition.y + yAdjustment);
   if (canMoveToTile(tileToMove)) {
     movePlayerToTile(playerPosition, tileToMove, player);
+  } else if (containsAttackable(tileToMove)) {
+    combat(player, tileToMove.content);
   }
 }
 
