@@ -21,6 +21,9 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
     movePlayerToTile(playerPosition, tileToMove, player);
   } else if (containsAttackable(tileToMove)) {
     combat(player, tileToMove.content);
+    if (tileToMove.content.health <= 0) {
+      tileToMove.content = undefined;
+    }
   }
 }
 
@@ -43,8 +46,6 @@ export default () => {
     if (direction === 'up' && playerPosition.y > 0) {
       handleMoveAction(level, player, playerPosition, 0, -1);
     }
-    const newPosition = level.getPlayerPosition();
-    console.log(`${newPosition.x}, ${newPosition.y}`);
   };
   return {
     level: level,

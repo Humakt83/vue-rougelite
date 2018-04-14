@@ -32,7 +32,7 @@ const getTile = type => {
 }
 
 const drawLevel = (level) => {
-  console.log(JSON.stringify(level))
+  //console.log(JSON.stringify(level))
   const tiles = [];
   const columns = 30;
   const rows = 13;
