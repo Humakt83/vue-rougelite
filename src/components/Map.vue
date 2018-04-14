@@ -1,51 +1,55 @@
 <template>
   <div class="map">
-    <span class="tile" v-for="(tile, index) in tiles"  :x="tile.type" :y="tile.type" v-bind:style="{ 'left': x + 'px' }">
+    <span class="tile" v-for="(tile, index) in tiles"  
+    :x="tile.type" 
+    :y="tile.type" 
+    v-bind:key="index"
+    v-bind:style="{left: tile.x + 'px', top: tile.y + 'px' }">
       {{ tile.type }}
     </span>
   </div>
 </template>
-
 <script>
-
 const Tile = {
-  props: ['tile'],
+  props: ["tile"],
   /*computed: {
     color() {
     	return this.item.color.toFixed(2);
     }
   },*/
-  template: "{{ tile.type }}",
-}
+  template: "{{ tile.type }}"
+};
 
 const generateMapData = () => {
+  const tiles = [];
+  const columns = 20
+  const tileSize = 30
 
-  const tiles = []
-
-  for(let i=0;i<10;i++){
-    tiles.push({type: "B", x: i*40, y: 1})
+  for (let i = 0; i < 100; i++) {
+    tiles.push({ type: "B", 
+                 x: (i % columns) * tileSize, 
+                 y: Math.floor(i/columns) * tileSize });
   }
 
-  return {tiles:tiles}
-}
+  return { tiles: tiles };
+};
 
 export default {
-  name: 'Map',
+  name: "Map",
   props: {
     msg: String
   },
   components: {
     tile: Tile
-  },  
+  },
   data() {
     /*return {tiles: [
       { type: '#' },
       { type: 'H' }
     ]}*/
-    return generateMapData()
+    return generateMapData();
   }
-}
-
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -72,12 +76,11 @@ a {
   height: 400px;
 }
 .tile {
-  background-color: brown;
-  border: solid 2px black;
+  border: solid 1px rgba(255, 255, 255, .1);
   position: absolute;
-  width: 40px;
-  height: 40px;
-  left:0px;
-  top:0px;
+  width: 30px;
+  height: 30px;
+  left: 0px;
+  top: 0px;
 }
 </style>
