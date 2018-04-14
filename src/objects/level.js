@@ -43,9 +43,14 @@ export default (columns, rows, player) => {
     return _.chain(level).find(tile => tile.content && !!tile.content.isPlayer).value();
   }
 
+  const getMonsterPositions = () => {
+    return _.chain(level).filter(tile => tile.content && tile.content.health && !tile.content.isPlayer).value();
+  }
+
   return {
     level: level,
     getPlayerPosition: getPlayerPosition,
-    getTile: (x, y) => getTile(level, x, y)
+    getTile: (x, y) => getTile(level, x, y),
+    getMonsterPositions: getMonsterPositions
   }
 };

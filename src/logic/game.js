@@ -10,20 +10,35 @@ const containsAttackable = (tile) => {
   return tile.content && tile.content.health;
 }
 
-const movePlayerToTile = (playerPosition, tileToMove, player) => {
-  tileToMove.content = player;
-  playerPosition.content = undefined;
+const moveToTile = (originalPosition, tileToMove) => {
+  tileToMove.content = originalPosition.content;
+  originalPosition.content = undefined;
+}
+
+const monstersTurn = (level) => {
+  level.getMonsterPositions().forEach(position => {
+    const moveX = Math.floor(Math.random() * 10) >= 5;
+    const direction = Math.sign(Math.floor(Math.random() * 10) - 5);
+    const xAdjustment = moveX ? direction : 0;
+    const yAdjustment = !moveX ? direction: 0;
+    const tileToMove = level.getTile(position.x + xAdjustment, position.y + yAdjustment);
+    if (tileToMove && canMoveToTile(tileToMove)) {
+      moveToTile(position, tileToMove);
+    }
+  });
 }
 
 const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustment) => {
   const tileToMove = level.getTile(playerPosition.x + xAdjustment, playerPosition.y + yAdjustment);
   if (canMoveToTile(tileToMove)) {
-    movePlayerToTile(playerPosition, tileToMove, player);
+    moveToTile(playerPosition, tileToMove);
+    monstersTurn(level);
   } else if (containsAttackable(tileToMove)) {
     combat(player, tileToMove.content);
     if (tileToMove.content.health <= 0) {
       tileToMove.content = undefined;
     }
+    monstersTurn(level);
   }
 }
 
@@ -37,10 +52,10 @@ export default () => {
     if (direction === 'left' && playerPosition.x > 0) {
       handleMoveAction(level, player, playerPosition, -1, 0);
     }
-    if (direction === 'right' && playerPosition.x < columns) {
+    if (direction === 'right' && playerPosition.x < columns - 1) {
       handleMoveAction(level, player, playerPosition, 1, 0);
     }
-    if (direction === 'down' && playerPosition.y < rows) {
+    if (direction === 'down' && playerPosition.y < rows - 1) {
       handleMoveAction(level, player, playerPosition, 0, 1);
     }
     if (direction === 'up' && playerPosition.y > 0) {
