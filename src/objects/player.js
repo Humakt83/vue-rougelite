@@ -8,7 +8,14 @@ export default () => {
     experience: 0,
     maxDamage: 20,
     minDamage: 5,
-    inventory: [],
+    inventory: {
+      head: undefined,
+      torso: undefined,
+      lefthand: undefined,
+      righthand: undefined,
+      legs: undefined,
+      backpack: ['blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu']
+    },
     isPlayer: true
   }
 };

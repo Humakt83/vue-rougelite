@@ -3,7 +3,7 @@
     <h3>Info</h3>
     <template v-if="player.health > 0">
       <Stats :player="player"/>
-      <Inventory />    
+      <Inventory :inventory="player.inventory"/>    
     </template>
     <template v-else>
       <h1>DÖÖD</h1>
