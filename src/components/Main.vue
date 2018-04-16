@@ -6,6 +6,9 @@
     <div class="infoArea">
       <Info :player="game.player"/>
     </div>
+    <div class="commandsArea">
+      <Commands @move="move"></Commands>
+    </div>
     <div class="logArea">
       <Log :gameLog="game.gameLog"/>
     </div>
@@ -17,6 +20,7 @@ import Level from './Level';
 import Info from './info/Info';
 import Log from './Log';
 import Game from '../logic/game';
+import Commands from './Commands';
 
 const game = Game();
 
@@ -45,7 +49,11 @@ export default {
   components: {
     Level,
     Info,
-    Log
+    Log,
+    Commands
+  },
+  methods: {
+    move: (direction) => game.move(direction)
   }
 }
 
@@ -74,11 +82,18 @@ export default {
     min-height: 75%;
   }
 
-  .logArea {
+  .commandsArea {
     position: absolute;
     left: 0;
     top: 75%;
-    width: 100%;
+    width: 30%;
+  }
+
+  .logArea {
+    position: absolute;
+    left: 30%;
+    top: 75%;
+    width: 70%;
     min-height: 25%;
     border: 2px solid black;
     margin: -6px;
