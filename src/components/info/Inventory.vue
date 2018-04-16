@@ -26,12 +26,16 @@ export default {
   }
 
   .backpack {
+    position: relative;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: inline-block;
+    max-height: 260px;
+    background-color: rgb(200, 180, 0);
   }
   .backpackSlot {
+    position: relative;
     width: 50px;
     height: 50px;
     background-color: rgb(200, 180, 0);

@@ -31,6 +31,17 @@ const getTile = type => {
 
 }
 
+const monsters = {
+  "turtle": "🐢",
+  "snake": "🐍",
+  "tiger": "🐅",
+  "gorilla": "🐒",
+  "ghost": "👻",
+  "alien": "👽",
+  "robot": "🤖",
+  "poo": "💩"
+}
+
 const getTileType = (tile) => {
         if(tile.isWall){
           return "🌳"
@@ -45,18 +56,7 @@ const getTileType = (tile) => {
         }
 
         if(tile.content.monsterType){
-          switch (tile.content.monsterType) {
-            case "turtle":
-              return "🐢";          
-            case "snake":
-              return "🐍";
-            case "tiger":
-              return "🐅";
-            case "gorilla":
-              return "🐒";
-            default:
-              return "💩";
-          }
+          return monsters[tile.content.monsterType];
         }
 }
 

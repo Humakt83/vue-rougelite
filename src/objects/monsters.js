@@ -19,14 +19,30 @@ export const turtle = () => {
 }
 
 export const gorilla = () => {
-  return createMonster(15, 20, 50, "gorilla", 10, 20, 300);
+  return createMonster(8, 15, 50, "gorilla", 5, 15, 300);
 }
 
 export const tiger = () => {
-  return createMonster(25, 15, 40, "tiger", 15, 25, 350);
+  return createMonster(15, 7, 40, "tiger", 15, 20, 350);
+}
+
+export const poo = () => {
+  return createMonster(1, 1, 5, "poo", 1, 2, 10);
+}
+
+export const ghost = () => {
+  return createMonster(5, 30, 5, "ghost", 1, 5, 100);
+}
+
+export const alien = () => {
+  return createMonster(10, 10, 25, "alien", 10, 20, 300);
+}
+
+export const robot = () => {
+  return createMonster(15, 15, 50, "robot", 15, 25, 450);
 }
 
 export const randomEnemy = () => {
-  const enemies = [turtle, snake, tiger, gorilla];
+  const enemies = [turtle, snake, tiger, gorilla, alien, poo, robot, ghost];
   return enemies[Math.floor(Math.random() * enemies.length)]();
 };
