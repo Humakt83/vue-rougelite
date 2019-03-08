@@ -14,9 +14,12 @@
       <div class="hand hand--right">
         <i class="far fa-hand-paper" />
       </div>
+      <div class="feet">
+        <i class="fas fa-shoe-prints" />
+      </div>
     </div>
     <div class="backpack">
-      <div class="backpackSlot" v-for="(item, index) in inventory.backpack" :key="index">
+      <div class="backpackSlot" :class="{'selected': index === selected}" v-for="(item, index) in inventory.backpack" :key="index" @click="select(item, index)">
         <span>{{ item.symbol }}</span>
       </div>
     </div>
@@ -26,7 +29,24 @@
 <script>
 
 export default {
-  props: ['inventory']
+  props: ['inventory'],
+  data() {
+    return {
+      selected: undefined,
+      selectedItem: undefined
+    }
+  },
+  methods: {
+    select(item, index) {
+      if (this.selectedItem === item && this.selected === index) {
+        this.selected = undefined;
+        this.selectedItem = undefined;
+      } else {
+        this.selected = index;
+        this.selectedItem = item;
+      }
+    }
+  }
 }
 
 </script>
@@ -43,7 +63,8 @@ export default {
     grid-template-rows: 40px 40px;
     grid-template-areas: 
       ". head ."
-      "left torso right";
+      "left torso right"
+      ". feet .";
     padding: 1rem 2rem;
     div {
       border-radius: 2px;
@@ -83,6 +104,12 @@ export default {
     .torso {
       grid-area: torso;
     }
+    .feet {
+      grid-area: feet;
+      i {
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   .backpack {
@@ -104,6 +131,9 @@ export default {
     cursor: pointer;
     &:hover {
       background-color: lightcyan;
+    }
+    &.selected {
+      background-color: lightgoldenrodyellow;
     }
   }
 }
