@@ -1,3 +1,5 @@
+import {randomArmor} from './armor';
+
 export default () => {
   return {
     maxHealth: 100,
@@ -13,7 +15,8 @@ export default () => {
       torso: undefined,
       lefthand: undefined,
       righthand: undefined,
-      backpack: ['blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu']
+      feet: undefined,
+      backpack: [randomArmor(), randomArmor(), randomArmor(), randomArmor()]
     },
     isPlayer: true
   }

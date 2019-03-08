@@ -17,6 +17,7 @@
     </div>
     <div class="backpack">
       <div class="backpackSlot" v-for="(item, index) in inventory.backpack" :key="index">
+        <span>{{ item.symbol }}</span>
       </div>
     </div>
   </div>
@@ -34,6 +35,7 @@ export default {
 <style scoped lang="scss">
 .inventory {
   display: flex;
+  flex-wrap: wrap;
   margin-left: 3rem;
   .paperdoll {
     display: grid;
@@ -84,20 +86,25 @@ export default {
   }
 
   .backpack {
-    position: relative;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: inline-block;
-    max-height: 260px;
-    background-color: rgb(200, 180, 0);
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    max-height: 10rem;
   }
   .backpackSlot {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(200, 180, 0);
+    display: table-cell;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: lightblue;
     border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.6rem;
+    cursor: pointer;
+    &:hover {
+      background-color: lightcyan;
+    }
   }
 }
 </style>
