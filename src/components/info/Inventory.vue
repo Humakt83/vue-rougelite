@@ -3,19 +3,34 @@
     <h3>Inventory</h3>
     <div class="paperdoll">
       <div class="head">
-        <i class="fas fa-hard-hat"/>
+        <span v-if="inventory.head">
+          {{ inventory.head.symbol }}
+        </span>
+        <i v-else class="fas fa-hard-hat"/>
       </div>
       <div class="hand hand--left">
-        <i class="far fa-hand-paper" />
+        <span v-if="inventory.lefthand">
+          {{ inventory.lefthand.symbol }}
+        </span>
+        <i v-else class="far fa-hand-paper" />
       </div>
       <div class="torso">
-        <i class="fas fa-tshirt" />
+        <span v-if="inventory.torso">
+          {{ inventory.torso.symbol }}
+        </span>
+        <i v-else class="fas fa-tshirt" />
       </div>
       <div class="hand hand--right">
-        <i class="far fa-hand-paper" />
+        <span v-if="inventory.righthand">
+          {{ inventory.righthand.symbol }}
+        </span>
+        <i v-else class="far fa-hand-paper" />
       </div>
       <div class="feet">
-        <i class="fas fa-shoe-prints" />
+        <span v-if="inventory.feet">
+          {{ inventory.feet.symbol }}
+        </span>
+        <i v-else class="fas fa-shoe-prints" />
       </div>
     </div>
     <div class="backpack">
@@ -73,9 +88,9 @@ export default {
       padding: 0.3rem 0.2rem;
       text-align: center;
       cursor: pointer;
+      font-size: 30px;
       i {        
         margin-top: 0.3rem;
-        font-size: 30px;
         font-weight: bolder;
         color: lightgrey;
       }

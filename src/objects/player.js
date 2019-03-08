@@ -1,4 +1,4 @@
-import {randomArmor} from './armor';
+import {randomArmor, helmet, platemail} from './armor';
 
 export default () => {
   return {
@@ -11,8 +11,8 @@ export default () => {
     maxDamage: 20,
     minDamage: 5,
     inventory: {
-      head: undefined,
-      torso: undefined,
+      head: helmet(),
+      torso: platemail(),
       lefthand: undefined,
       righthand: undefined,
       feet: undefined,
