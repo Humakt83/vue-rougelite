@@ -13,7 +13,6 @@ export default () => {
       torso: undefined,
       lefthand: undefined,
       righthand: undefined,
-      legs: undefined,
       backpack: ['blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu','blaa', 'bluu']
     },
     isPlayer: true

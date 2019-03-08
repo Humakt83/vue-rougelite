@@ -32,10 +32,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.inventory {
+  display: flex;
+  margin-left: 3rem;
   .paperdoll {
     display: grid;
     grid-template-columns: 40px 40px 40px;
-    grid-template-rows: auto;
+    grid-template-rows: 40px 40px;
     grid-template-areas: 
       ". head ."
       "left torso right";
@@ -96,4 +99,5 @@ export default {
     background-color: rgb(200, 180, 0);
     border: 1px solid black;
   }
+}
 </style>
