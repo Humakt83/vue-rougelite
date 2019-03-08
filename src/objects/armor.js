@@ -29,7 +29,7 @@ export const kiteShield = () => {
   return {
     defenseBonus: 6,
     itemType: 'armor',
-    slot: 'shield',
+    slot: 'hand',
     symbol: '🛡'
   }
 }
@@ -38,7 +38,7 @@ export const buckler = () => {
   return {
     defenseBonus: 1,
     itemType: 'armor',
-    slot: 'shield',
+    slot: 'hand',
     symbol: '💿'
   }
 }

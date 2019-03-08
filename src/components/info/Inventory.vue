@@ -2,31 +2,31 @@
   <div class="inventory">
     <h3>Inventory</h3>
     <div class="paperdoll">
-      <div class="head">
+      <div class="head" :class="{'selectable': headSelectable}">
         <span v-if="inventory.head">
           {{ inventory.head.symbol }}
         </span>
         <i v-else class="fas fa-hard-hat"/>
       </div>
-      <div class="hand hand--left">
+      <div class="hand hand--left" :class="{'selectable': handSelectable}">
         <span v-if="inventory.lefthand">
           {{ inventory.lefthand.symbol }}
         </span>
         <i v-else class="far fa-hand-paper" />
       </div>
-      <div class="torso">
+      <div class="torso" :class="{'selectable': torsoSelectable}">
         <span v-if="inventory.torso">
           {{ inventory.torso.symbol }}
         </span>
         <i v-else class="fas fa-tshirt" />
       </div>
-      <div class="hand hand--right">
+      <div class="hand hand--right" :class="{'selectable': handSelectable}">
         <span v-if="inventory.righthand">
           {{ inventory.righthand.symbol }}
         </span>
         <i v-else class="far fa-hand-paper" />
       </div>
-      <div class="feet">
+      <div class="feet" :class="{'selectable': feetSelectable}">
         <span v-if="inventory.feet">
           {{ inventory.feet.symbol }}
         </span>
@@ -51,6 +51,20 @@ export default {
       selectedItem: undefined
     }
   },
+  computed: {
+    headSelectable() {
+      return this.selectableBodySlot('head');
+    },
+    torsoSelectable() {
+      return this.selectableBodySlot('torso');
+    },
+    handSelectable() {
+      return this.selectableBodySlot('hand');
+    },
+    feetSelectable() {
+      return this.selectableBodySlot('feet');
+    }
+  },
   methods: {
     select(item, index) {
       if (this.selectedItem === item && this.selected === index) {
@@ -60,6 +74,12 @@ export default {
         this.selected = index;
         this.selectedItem = item;
       }
+    },
+    selectableBodySlot(slotType) {
+      if (!this.selectedItem || !this.selected) {
+        return false;
+      }
+      return this.selectedItem.slot === slotType;
     }
   }
 }
@@ -89,6 +109,9 @@ export default {
       text-align: center;
       cursor: pointer;
       font-size: 30px;
+      &.selectable {
+        background-color: lightgoldenrodyellow; 
+      }
       i {        
         margin-top: 0.3rem;
         font-weight: bolder;
