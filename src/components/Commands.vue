@@ -1,9 +1,9 @@
 <template>
   <div class="commands">
-      <button class="left" @click="left()">LEFT</button>
-      <button class="right" @click="right()">RIGHT</button>
-      <button class="up" @click="up()">UP</button>
-      <button class="down" @click="down()">DOWN</button>
+    <i @click="up()" class="fas fa-arrow-alt-circle-up" />
+    <i @click="left()" class="fas fa-arrow-alt-circle-left" />
+    <i @click="down()" class="fas fa-arrow-alt-circle-down" />
+    <i @click="right()" class="fas fa-arrow-alt-circle-right" />
   </div>
 </template>
 
@@ -22,34 +22,38 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .commands button {
-    font-size: 18px;
-    border: 1px solid black;
-    border-radius: 15px;
-    width: 100px;
-    position: absolute;
-    height: 30px;
-    background-color: rgb(80, 255, 180);
+.commands {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    ". up ."
+    "left down right";
+  padding: 1rem 2rem;
+  i {
+    font-size: 48px;
     font-weight: bolder;
+    color: blue;
+    cursor: pointer;
+    &:hover {
+      color: cyan;
+    }
   }
 
-  .left {
-      left: 0;
-      top: 30px;
+  .fa-arrow-alt-circle-up {
+    grid-area: up;
   }
 
-  .right {
-      left: 200px;
-      top: 30px;
+  .fa-arrow-alt-circle-left {
+    grid-area: left;
   }
 
-  .down {
-      top: 30px;
-      left: 100px;
+  .fa-arrow-alt-circle-down {
+    grid-area: down;
   }
 
-  .up {
-      top: 0;
-      left: 100px;
+  .fa-arrow-alt-circle-right {
+    grid-area: right;
   }
+}
 </style>
