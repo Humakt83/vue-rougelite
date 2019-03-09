@@ -12,6 +12,8 @@
     <div class="logArea">
       <Log :gameLog="gameLog"/>
     </div>
+    <GameOver v-if="player.health <= 0" />
+    <Victory v-if="victory" />
   </div>
 </template>
 
@@ -21,6 +23,8 @@ import Info from './info/Info';
 import Log from './Log';
 import Game from '../logic/game';
 import Commands from './Commands';
+import GameOver from './GameOver';
+import Victory from './Victory';
 
 const game = Game();
 
@@ -43,7 +47,9 @@ export default {
     Level,
     Info,
     Log,
-    Commands
+    Commands,
+    GameOver,
+    Victory
   },
   mounted() {
     const that = this;
@@ -57,6 +63,11 @@ export default {
         that.changeLevel(cmd());
       }
     })
+  },
+  computed: {
+    victory() {
+      return !!this.player.winner;
+    }
   },
   methods: {
     move(direction) {

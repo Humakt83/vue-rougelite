@@ -11,6 +11,8 @@ const LEVEL_TYPES = [
   { env: 'snow', floorColor: 'snow', wallSymbol: '🎄', doorSymbol: '🚪'}
 ];
 
+const FINAL_LEVEL = 2;
+
 const createTile = (x, y, wall = false, door = false) => {
   return {
     content: undefined,
@@ -48,7 +50,7 @@ const place = (level, content, columns, rows) => {
   }
 }
 
-export default (columns, rows, player, monsterScoreMultiplier = 1) => {
+export default (columns, rows, player, currentLevel = 1) => {
   const numberOfArmor = 2;
   const numberOfWeapons = 1;
   const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
@@ -78,7 +80,7 @@ export default (columns, rows, player, monsterScoreMultiplier = 1) => {
     }
   }
 
-  let remainingMonsterScore = 500 * monsterScoreMultiplier;
+  let remainingMonsterScore = 500 * currentLevel;
   while (remainingMonsterScore > 0) {
     const monster = randomEnemy();
     remainingMonsterScore -= monster.experience;
@@ -91,6 +93,10 @@ export default (columns, rows, player, monsterScoreMultiplier = 1) => {
 
   for (let i = 0; i < numberOfWeapons; i++) {
     place(level, randomWeapon(), columns, rows);
+  }
+
+  if (currentLevel >= FINAL_LEVEL) {
+    place(level, {symbol: '💰', type: 'treasure'}, columns, rows);
   }
   
   const getPlayerPosition = () => {

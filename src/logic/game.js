@@ -2,13 +2,11 @@ import Player from '../objects/player';
 import Level from '../objects/level';
 import combat from './combat'; 
 
-let gameOver = false;
-
 const columns = 30;
 const rows = 13;
 const player = Player();
-let monsterScoreMultiplier = 1;
-const createLevel = () => Level(columns, rows, player, monsterScoreMultiplier++);
+let currentLevel = 1;
+const createLevel = () => Level(columns, rows, player, currentLevel++);
 const level = createLevel();
 const gameLog = ['Welcome weary traveler!'];
 
@@ -22,6 +20,10 @@ const containsAttackable = (tile) => {
 
 const containsItem = (tile) => {
   return tile.content && tile.content.itemType;
+}
+
+const containsTreasure = (tile) => {
+  return tile.content && tile.content.type === 'treasure';
 }
 
 const moveToTile = (originalPosition, tileToMove) => {
@@ -56,7 +58,6 @@ const attackPlayer = (position, tileToMove) => {
   setAttackAnimation(tileToMove);
   if (tileToMove.content.health <= 0) {
     tileToMove.content = undefined;
-    gameOver = true;
     gameLog.unshift('GAME OVER!!!');
   }
 }
@@ -107,7 +108,7 @@ const levelUp = (gameLog, player) => {
   player.experience -= 1000;
 }
 
-const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustment) => {
+function handleMoveAction(level, player, playerPosition, xAdjustment, yAdjustment) {
   let levelNew = undefined;
   const tileToMove = level.getTile(playerPosition.x + xAdjustment, playerPosition.y + yAdjustment);
   if (canMoveToTile(tileToMove)) {
@@ -117,6 +118,8 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
     levelNew = createLevel()
   } else if (containsItem(tileToMove)) {
     takeItem(player, tileToMove);
+  } else if (containsTreasure(tileToMove)) {
+    player.winner = true;
   } else if (containsAttackable(tileToMove)) {
     combat(player, tileToMove.content, gameLog);
     setAttackAnimation(tileToMove);
@@ -138,24 +141,24 @@ export default () => {
   return {
     level: level,
     move(direction) {
-      if (gameOver) {
-        return {};
+      if (this.player.health <= 0) {
+        return {}
       }
       const playerPosition = this.level.getPlayerPosition();
       if (direction === 'left' && playerPosition.x > 0) {
-        return handleMoveAction(this.level, player, playerPosition, -1, 0);
+        return handleMoveAction(this.level, this.player, playerPosition, -1, 0);
       }
       if (direction === 'right' && playerPosition.x < columns - 1) {
-        return handleMoveAction(this.level, player, playerPosition, 1, 0);
+        return handleMoveAction(this.level, this.player, playerPosition, 1, 0);
       }
       if (direction === 'down' && playerPosition.y < rows - 1) {
-        return handleMoveAction(this.level, player, playerPosition, 0, 1);
+        return handleMoveAction(this.level, this.player, playerPosition, 0, 1);
       }
       if (direction === 'up' && playerPosition.y > 0) {
-        return handleMoveAction(this.level, player, playerPosition, 0, -1);
+        return handleMoveAction(this.level, this.player, playerPosition, 0, -1);
       }
     },
-    player: player,
+    player,
     gameLog: gameLog
   }
 }

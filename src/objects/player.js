@@ -8,6 +8,7 @@ export default () => {
     experience: 0,
     maxDamage: 20,
     minDamage: 5,
+    winner: false,
     inventory: {
       head: undefined,
       torso: undefined,
