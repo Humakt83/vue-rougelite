@@ -1,6 +1,6 @@
 export const platemail = () => {
   return {
-    defenseBonus: 10,
+    defenseBonus: 50,
     itemType: 'armor',
     slot: 'torso',
     symbol: '👘'
@@ -9,7 +9,7 @@ export const platemail = () => {
 
 export const chainmail = () => {
   return {
-    defenseBonus: 5,
+    defenseBonus: 20,
     itemType: 'armor',
     slot: 'torso',
     symbol: '👗'
@@ -18,7 +18,7 @@ export const chainmail = () => {
 
 export const splintmail = () => {
   return {
-    defenseBonus: 7,
+    defenseBonus: 40,
     itemType: 'armor',
     slot: 'torso',
     symbol: '👕'
@@ -27,7 +27,7 @@ export const splintmail = () => {
 
 export const kiteShield = () => {
   return {
-    defenseBonus: 6,
+    defenseBonus: 20,
     itemType: 'armor',
     slot: 'hand',
     symbol: '🛡'
@@ -36,7 +36,7 @@ export const kiteShield = () => {
 
 export const buckler = () => {
   return {
-    defenseBonus: 1,
+    defenseBonus: 10,
     itemType: 'armor',
     slot: 'hand',
     symbol: '💿'
@@ -45,7 +45,7 @@ export const buckler = () => {
 
 export const helmet = () => {
   return {
-    defenseBonus: 2,
+    defenseBonus: 15,
     itemType: 'armor',
     slot: 'head',
     symbol: '🎩',
@@ -54,7 +54,7 @@ export const helmet = () => {
 
 export const boots = () => {
   return {
-    defenseBonus: 1,
+    defenseBonus: 15,
     itemType: 'armor',
     slot: 'feet',
     symbol: '👟'

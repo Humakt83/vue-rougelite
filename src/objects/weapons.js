@@ -1,7 +1,7 @@
 export const sword = () => {
   return {
-    attackBonus: 5,
-    defenseBonus: 2,
+    attackBonus: 50,
+    defenseBonus: 15,
     itemType: 'weapon',
     slot: 'hand',
     symbol: '🗡',
@@ -10,7 +10,7 @@ export const sword = () => {
 
 export const hammer = () => {
   return {
-    attackBonus: 7,
+    attackBonus: 75,
     itemType: 'weapon',
     slot: 'hand',
     symbol: '🔨'
