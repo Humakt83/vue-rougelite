@@ -2,31 +2,31 @@
   <div class="inventory">
     <h3>Inventory</h3>
     <div class="paperdoll">
-      <div class="head" :class="{'selectable': headSelectable}">
+      <div class="head" :class="{'selectable': headSelectable}" @click="move('head')">
         <span v-if="inventory.head">
           {{ inventory.head.symbol }}
         </span>
         <i v-else class="fas fa-hard-hat"/>
       </div>
-      <div class="hand hand--left" :class="{'selectable': handSelectable}">
+      <div class="hand hand--left" :class="{'selectable': handSelectable}" @click="move('hand', 'left')">
         <span v-if="inventory.lefthand">
           {{ inventory.lefthand.symbol }}
         </span>
         <i v-else class="far fa-hand-paper" />
       </div>
-      <div class="torso" :class="{'selectable': torsoSelectable}">
+      <div class="torso" :class="{'selectable': torsoSelectable}" @click="move('torso')">
         <span v-if="inventory.torso">
           {{ inventory.torso.symbol }}
         </span>
         <i v-else class="fas fa-tshirt" />
       </div>
-      <div class="hand hand--right" :class="{'selectable': handSelectable}">
+      <div class="hand hand--right" :class="{'selectable': handSelectable}" @click="move('hand', 'right')">
         <span v-if="inventory.righthand">
           {{ inventory.righthand.symbol }}
         </span>
         <i v-else class="far fa-hand-paper" />
       </div>
-      <div class="feet" :class="{'selectable': feetSelectable}">
+      <div class="feet" :class="{'selectable': feetSelectable}" @click="move('feet')">
         <span v-if="inventory.feet">
           {{ inventory.feet.symbol }}
         </span>
@@ -68,18 +68,34 @@ export default {
   methods: {
     select(item, index) {
       if (this.selectedItem === item && this.selected === index) {
-        this.selected = undefined;
-        this.selectedItem = undefined;
+        this.unselect();
       } else {
         this.selected = index;
         this.selectedItem = item;
       }
     },
     selectableBodySlot(slotType) {
-      if (!this.selectedItem || !this.selected) {
+      if (!this.selectedItem || this.selected === undefined) {
         return false;
       }
-      return this.selectedItem.slot === slotType;
+      return slotType.includes(this.selectedItem.slot);
+    },
+    move(slotType, handPrefix = '') {
+      if (!this.selectableBodySlot(slotType)) {
+        return false;
+      }   
+      if (this.selected !== undefined) {
+        this.inventory.backpack.splice(this.selected, 1);
+      }
+      if (!!this.inventory[handPrefix + this.selectedItem.slot]) {
+        this.inventory.backpack.push(this.inventory[handPrefix + this.selectedItem.slot]);
+      }
+      this.inventory[handPrefix + this.selectedItem.slot] = this.selectedItem;      
+      this.unselect();
+    },
+    unselect() {
+      this.selectedItem = undefined;
+      this.selected = undefined;
     }
   }
 }
