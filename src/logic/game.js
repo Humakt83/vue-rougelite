@@ -34,7 +34,8 @@ const moveToTile = (originalPosition, tileToMove) => {
 const takeItem = (player, tile) => {
   const item = tile.content;
   player.inventory.backpack.push(item);
-  gameLog.unshift(`Picked up ${item.symbol} (defense bonus: ${item.defenseBonus | 0}, attack bonus: ${item.attackBonus | 0})`)
+  const wearableText = item.itemType !== 'consumable' ? `(defense bonus: ${item.defenseBonus | 0}, attack bonus: ${item.attackBonus | 0})` : '';
+  gameLog.unshift(`Picked up ${item.symbol} ${wearableText}`)
   tile.content = undefined;
 }
 
