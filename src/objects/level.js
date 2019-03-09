@@ -48,8 +48,7 @@ const place = (level, content, columns, rows) => {
   }
 }
 
-export default (columns, rows, player) => {
-  const numberOfEnemies = (columns * rows) / Math.max(10, Math.floor(Math.random() * 10));
+export default (columns, rows, player, monsterScoreMultiplier = 1) => {
   const numberOfArmor = 3;
   const numberOfWeapons = 1;
   const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
@@ -79,8 +78,11 @@ export default (columns, rows, player) => {
     }
   }
 
-  for (let i = 0; i < numberOfEnemies; i++) {
-    place(level, randomEnemy(), columns, rows);
+  let remainingMonsterScore = 1000 * monsterScoreMultiplier;
+  while (remainingMonsterScore > 0) {
+    const monster = randomEnemy();
+    remainingMonsterScore -= monster.experience;
+    place(level, monster, columns, rows);
   }
 
   for (let i = 0; i < numberOfArmor; i++) {

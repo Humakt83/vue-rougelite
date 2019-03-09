@@ -7,9 +7,10 @@ let gameOver = false;
 const columns = 30;
 const rows = 13;
 const player = Player();
-const createLevel = () => Level(columns, rows, player);
+let monsterScoreMultiplier = 1;
+const createLevel = () => Level(columns, rows, player, monsterScoreMultiplier++);
 const level = createLevel();
-const gameLog = ['Welcome to the jungle!'];
+const gameLog = ['Welcome weary traveler!'];
 
 const canMoveToTile = (tileToMove) => {
   return !tileToMove.isWall && !tileToMove.isDoor && !tileToMove.content;
