@@ -1,5 +1,3 @@
-import {randomArmor, helmet, platemail} from './armor';
-
 export default () => {
   return {
     maxHealth: 100,
@@ -11,13 +9,36 @@ export default () => {
     maxDamage: 20,
     minDamage: 5,
     inventory: {
-      head: helmet(),
-      torso: platemail(),
+      head: undefined,
+      torso: undefined,
       lefthand: undefined,
       righthand: undefined,
       feet: undefined,
-      backpack: [randomArmor(), randomArmor(), randomArmor(), randomArmor()]
+      backpack: []
     },
-    isPlayer: true
+    isPlayer: true,
+    getDefense() {
+      const combatBonusFromItems = [
+        this.inventory.head,
+        this.inventory.torso,
+        this.inventory.lefthand,
+        this.inventory.righthand,
+        this.inventory.feet]
+        .filter(item => !!item)
+        .map(item => item.defenseBonus | 0)
+        .reduce((prev, current) => prev + current, 0);
+      const defenseMultiplier = 1 + (combatBonusFromItems / 100);
+      return this.defense * defenseMultiplier;
+    },
+    getAttack() {
+      const combatBonusFromItems = [
+        this.inventory.lefthand,
+        this.inventory.righthand]
+        .filter(item => !!item)
+        .map(item => item.attackBonus | 0)
+        .reduce((prev, current) => prev + current, 0);
+      const attackMultiplier = 1 + (combatBonusFromItems / 100);
+      return this.attack * attackMultiplier;
+    }
   }
 };
