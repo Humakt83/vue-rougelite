@@ -71,6 +71,17 @@ const monstersTurn = (level) => {
   });
 }
 
+const levelUp = (gameLog, player) => {
+  gameLog.unshift('Congratulations, you gained level!');
+  player.level++;
+  player.maxHealth += 10;
+  player.attack++;
+  player.defense++;
+  player.health = player.maxHealth;
+  player.maxDamage++;
+  player.experience -= 1000;
+}
+
 const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustment) => {
   const tileToMove = level.getTile(playerPosition.x + xAdjustment, playerPosition.y + yAdjustment);
   if (canMoveToTile(tileToMove)) {
@@ -85,14 +96,7 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
       gameLog.unshift(`Monstrous ${opponent.monsterType} defeated. Gained ${opponent.experience} experience.` );
       player.experience += tileToMove.content.experience;
       if (player.experience >= 1000) {
-        gameLog.unshift('Congratulations, you gained level!');
-        player.level++;
-        player.maxHealth += 10;
-        player.attack++;
-        player.defense++;
-        player.health = player.maxHealth;
-        player.maxDamage++;
-        player.experience -= 1000;
+        levelUp(gameLog, player);
       }
       tileToMove.content = undefined;
     }
