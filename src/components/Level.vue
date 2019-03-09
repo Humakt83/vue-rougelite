@@ -21,6 +21,9 @@ const Tile = {
 };
 
 const getTileType = (tile) => {
+  if(tile.isDoor) {
+    return '🚪'
+  }
   if(tile.isWall){
     return "🌳"
   }
@@ -36,7 +39,6 @@ const getTileType = (tile) => {
 }
 
 const drawLevel = (level) => {
-  // console.log(JSON.stringify(level))
   const tiles = [];
   const columns = 30;
   const rows = 13;

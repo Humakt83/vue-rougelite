@@ -4,12 +4,15 @@ import { randomEnemy } from './monsters';
 import { randomWeapon } from './weapons';
 import { randomArmor } from './armor';
 
-const createTile = (x, y, wall) => {
+const LEVEL_TYPES = ['jungle', 'spaceship', 'desert'];
+
+const createTile = (x, y, wall = false, door = false) => {
   return {
     content: undefined,
     x: x,
     y: y,
-    isWall: !!wall
+    isWall: wall,
+    isDoor: door,
   }
 }
 
@@ -42,11 +45,24 @@ export default (columns, rows, player) => {
     }
   }
 
-  for (let i = 0; i < numberOfWalls; i++) {
-    level[Math.floor(Math.random()*level.length)].isWall = true;
+  getTile(level, 1, 1).content = player;
+
+  let doorPlaced = false;
+  while (!doorPlaced) {
+    const position = Math.floor(Math.random()*level.length);
+    if (!level[position].content) {
+      level[position].isDoor = true;
+      doorPlaced = true;
+    }
   }
 
-  getTile(level, 1, 1).content = player;
+  for (let i = 0; i < numberOfWalls; i++) {
+    const position = Math.floor(Math.random()*level.length);
+    if (!level[position].content && !level[position].isDoor) {
+      level[position].isWall = true;
+    }
+  }
+
   for (let i = 0; i < numberOfEnemies; i++) {
     place(level, randomEnemy(), columns, rows);
   }
