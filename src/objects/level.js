@@ -49,7 +49,7 @@ const place = (level, content, columns, rows) => {
 }
 
 export default (columns, rows, player, monsterScoreMultiplier = 1) => {
-  const numberOfArmor = 3;
+  const numberOfArmor = 2;
   const numberOfWeapons = 1;
   const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
   const level = [];
@@ -78,7 +78,7 @@ export default (columns, rows, player, monsterScoreMultiplier = 1) => {
     }
   }
 
-  let remainingMonsterScore = 1000 * monsterScoreMultiplier;
+  let remainingMonsterScore = 500 * monsterScoreMultiplier;
   while (remainingMonsterScore > 0) {
     const monster = randomEnemy();
     remainingMonsterScore -= monster.experience;

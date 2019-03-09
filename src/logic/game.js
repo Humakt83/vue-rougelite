@@ -53,11 +53,17 @@ const findClosest = (target, tiles, minRadius) => {
 
 const attackPlayer = (position, tileToMove) => {
   combat(position.content, tileToMove.content, gameLog);
+  setAttackAnimation(tileToMove);
   if (tileToMove.content.health <= 0) {
     tileToMove.content = undefined;
     gameOver = true;
     gameLog.unshift('GAME OVER!!!');
   }
+}
+
+const setAttackAnimation = (tile) => {
+  tile.animation = {triggerAttack: true};
+  setTimeout(() => tile.animation = undefined, 100);
 }
 
 const randomMove = (level, position) => {
@@ -113,6 +119,7 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
     takeItem(player, tileToMove);
   } else if (containsAttackable(tileToMove)) {
     combat(player, tileToMove.content, gameLog);
+    setAttackAnimation(tileToMove);
     const opponent = tileToMove.content;
     if (opponent.health <= 0) {
       gameLog.unshift(`Monstrous ${opponent.monsterType} defeated. Gained ${opponent.experience} experience.` );

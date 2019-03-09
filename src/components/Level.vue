@@ -3,7 +3,10 @@
     <div class="tile" v-for="(tile, index) in tiles"
     :key="index"
     :style="{left: tile.x + '%', top: tile.y + '%'}">
-      {{ tile.type }}
+      <span>{{ tile.type }}</span>
+      <template v-if="tile.animation">
+        <span class="animation">💥</span>
+      </template>
     </div>
   </div>
 </template>
@@ -15,10 +18,10 @@ const getTileType = (tile, environment) => {
   if (tile.isWall){
     return environment.wallSymbol;
   }
-  if(!tile.content){
+  if (!tile.content){
     return '';
   }
-  if(tile.content.isPlayer){
+  if (tile.content.isPlayer){
     return "🏃"
   }
   return tile.content.symbol;
@@ -35,6 +38,7 @@ const drawLevel = (level) => {
       type: getTileType(tile, level.environment),
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows),
+      animation: tile.animation
     })
   })
 
@@ -91,5 +95,20 @@ a {
   vertical-align: top;
   line-height: 1em;
   user-select: none;
+}
+.animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+  animation: fade 1s;
+  opacity: 0;
+}
+
+@keyframes fade {
+  0% { opacity: 0;}
+  50% { opacity: 1;}
+  100% { opacity: 0;}
 }
 </style>
