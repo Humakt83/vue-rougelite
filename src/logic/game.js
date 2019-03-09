@@ -35,22 +35,36 @@ const takeItem = (player, tile) => {
   tile.content = undefined;
 }
 
+const findClosest = (target, tiles) => {
+  const x = target.x;
+  const y = target.y;
+  let closest = undefined;
+  let closestDistance = undefined;
+  for (let tile of tiles) {
+    let distance = (Math.abs(tile.x - x) + Math.abs(tile.y - y));
+    if (!closestDistance || distance < closestDistance) {
+      closest = tile;
+      closestDistance = distance;
+    }
+  }
+  return closest;
+}
+
 const monstersTurn = (level) => {
+  const playerPosition = level.getPlayerPosition();
+
   level.getMonsterPositions().forEach(position => {
-    const moveX = Math.floor(Math.random() * 10) >= 5;
-    const direction = Math.sign(Math.floor(Math.random() * 10) - 5);
-    const xAdjustment = moveX ? direction : 0;
-    const yAdjustment = !moveX ? direction: 0;
-    const tileToMove = level.getTile(position.x + xAdjustment, position.y + yAdjustment);
-    if (tileToMove && canMoveToTile(tileToMove)) {
-      moveToTile(position, tileToMove);
-    } else if (tileToMove && containsAttackable(tileToMove) && tileToMove.content.isPlayer) {
+    const movableNeighbors = level.getNeighbors(position).filter(tile => playerPosition === tile || canMoveToTile(tile));
+    const tileToMove = findClosest(playerPosition, movableNeighbors);
+    if (tileToMove && tileToMove === playerPosition) {
       combat(position.content, tileToMove.content, gameLog);
       if (tileToMove.content.health <= 0) {
         tileToMove.content = undefined;
         gameOver = true;
         gameLog.unshift('GAME OVER!!!');
       }
+    } else if (tileToMove) {
+      moveToTile(position, tileToMove);
     }
   });
 }

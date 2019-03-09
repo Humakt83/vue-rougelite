@@ -14,8 +14,8 @@ const LEVEL_TYPES = [
 const createTile = (x, y, wall = false, door = false) => {
   return {
     content: undefined,
-    x: x,
-    y: y,
+    x,
+    y,
     isWall: wall,
     isDoor: door,
   }
@@ -23,6 +23,17 @@ const createTile = (x, y, wall = false, door = false) => {
 
 const getTile = (level, x, y) => {
   return level.find(tile => tile.x === x && tile.y === y);
+}
+
+const getNeighbors = (level, tile) => {
+  const x = tile.x;
+  const y = tile.y;
+  return [
+    getTile(level, x + 1, y),
+    getTile(level, x - 1, y),
+    getTile(level, x, y - 1),
+    getTile(level, x, y + 1),
+  ].filter(tile => !!tile);
 }
 
 const place = (level, content, columns, rows) => {
@@ -38,7 +49,7 @@ const place = (level, content, columns, rows) => {
 }
 
 export default (columns, rows, player) => {
-  const numberOfEnemies = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
+  const numberOfEnemies = (columns * rows) / Math.max(10, Math.floor(Math.random() * 10));
   const numberOfArmor = 3;
   const numberOfWeapons = 1;
   const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
@@ -94,7 +105,12 @@ export default (columns, rows, player) => {
     level: level,
     environment,
     getPlayerPosition: getPlayerPosition,
-    getTile: (x, y) => getTile(level, x, y),
-    getMonsterPositions: getMonsterPositions
+    getTile(x, y) { 
+      return getTile(this.level, x, y);
+    },
+    getMonsterPositions,
+    getNeighbors(tile) {
+      return getNeighbors(this.level, tile);
+    }
   }
 };
