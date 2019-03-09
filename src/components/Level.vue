@@ -90,6 +90,7 @@ a {
   width: 100%;
   height: 100%;
   margin-top: 4px;
+  position: relative;
 }
 .animation {
   position: absolute;
