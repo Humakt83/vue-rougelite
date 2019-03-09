@@ -1,8 +1,7 @@
 <template>
   <div class="level" :style="{'background-color': color}">
     <div class="tile" v-for="(tile, index) in tiles"
-    :key="index"
-    :style="{left: tile.x + '%', top: tile.y + '%'}">
+    :key="index">
       {{ tile.type }}
     </div>
   </div>
@@ -28,15 +27,15 @@ const drawLevel = (level) => {
   const tiles = [];
   const columns = 30;
   const rows = 13;
-  const tileSize = columns;
 
-  level.level.forEach((tile) => {
-    tiles.push({
-      type: getTileType(tile, level.environment),
-      x: tile.x * (100 / columns),
-      y: tile.y * (100 / rows),
-    })
-  })
+ for (let y = 0; y < rows; y++) {
+  for (let x = 0; x < columns; x++) {
+      const tile = level.getTile(x, y);
+      tiles.push({
+        type: getTileType(tile, level.environment)
+      });
+    }
+  }
 
   return tiles;
 };
@@ -73,23 +72,19 @@ a {
 }
 .level {
   border: solid 2px black;
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(30, 3.33%);
+  align-items: center;
   width: calc(75vw - 4px);
   height: calc(75vh - 4px);
 }
 .tile {
-  border: solid 1px rgba(255, 255, 255, 0.1);
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  left: 0px;
-  top: 0px;
-  font-size: calc(75vh / 13);
-  transform: scale(calc(2 * (13 / 30)), 1.1);
+  font-size: calc(75vh / 13 - 15px);
   margin: 0;
   padding: 0;
-  vertical-align: top;
-  line-height: 1em;
   user-select: none;
+  width: 100%;
+  height: 100%;
+  margin-top: 4px;
 }
 </style>
