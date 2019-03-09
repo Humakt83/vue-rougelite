@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { randomEnemy } from './monsters';
 import { randomWeapon } from './weapons';
 import { randomArmor } from './armor';
+import { randomConsumable } from './consumables';
 
 const LEVEL_TYPES = [
   { env: 'forest', floorColor: 'lightgreen', wallSymbol: '🌳', doorSymbol: '🚪'},
@@ -53,6 +54,7 @@ const place = (level, content, columns, rows) => {
 export default (columns, rows, player, currentLevel = 1) => {
   const numberOfArmor = 2;
   const numberOfWeapons = 1;
+  const numberOfConsumables = 3;
   const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
   const level = [];
   
@@ -93,6 +95,10 @@ export default (columns, rows, player, currentLevel = 1) => {
 
   for (let i = 0; i < numberOfWeapons; i++) {
     place(level, randomWeapon(), columns, rows);
+  }
+
+  for (let i = 0; i < numberOfConsumables; i++) {
+    place(level, randomConsumable(), columns, rows);
   }
 
   if (currentLevel >= FINAL_LEVEL) {
