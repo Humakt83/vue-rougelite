@@ -1,40 +1,26 @@
 <template>
-  <div class="level">
-    <span class="tile" v-for="(tile, index) in tiles"  
-    :x="tile.type" 
-    :y="tile.type" 
-    v-bind:key="index"
-    v-bind:style="{left: tile.x + '%', top: tile.y + '%' }">
+  <div class="level" :style="{'background-color': color}">
+    <div class="tile" v-for="(tile, index) in tiles"
+    :key="index"
+    :style="{left: tile.x + '%', top: tile.y + '%'}">
       {{ tile.type }}
-    </span>
+    </div>
   </div>
 </template>
 <script>
-const Tile = {
-  props: ["tile"],
-  /*computed: {
-    color() {
-    	return this.item.color.toFixed(2);
-    }
-  },*/
-  template: "{{ tile.type }}"
-};
-
 const getTileType = (tile, environment) => {
   if(tile.isDoor) {
     return environment.doorSymbol;
   }
-  if(tile.isWall){
+  if (tile.isWall){
     return environment.wallSymbol;
   }
   if(!tile.content){
-    return environment.floorSymbol;
+    return '';
   }
-
   if(tile.content.isPlayer){
     return "🏃"
   }
-
   return tile.content.symbol;
 }
 
@@ -48,7 +34,7 @@ const drawLevel = (level) => {
     tiles.push({
       type: getTileType(tile, level.environment),
       x: tile.x * (100 / columns),
-      y: tile.y * (100 / rows)
+      y: tile.y * (100 / rows),
     })
   })
 
@@ -58,12 +44,12 @@ const drawLevel = (level) => {
 export default {
   name: "Level",
   props: ['level'],
-  components: {
-    tile: Tile
-  },
   computed: {
     tiles(){
       return drawLevel(this.level)
+    },
+    color() {
+      return this.level.environment.floorColor;
     }
   }
   };
@@ -86,7 +72,6 @@ a {
   color: #42b983;
 }
 .level {
-  background-color: lightgreen;
   border: solid 2px black;
   position: relative;
   width: calc(75vw - 4px);

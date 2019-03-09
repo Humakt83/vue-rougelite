@@ -5,10 +5,10 @@ import { randomWeapon } from './weapons';
 import { randomArmor } from './armor';
 
 const LEVEL_TYPES = [
-  { env: 'jungle', floorSymbol: '🍃', wallSymbol: '🌳', doorSymbol: '🚪'},
-  { env: 'spaceship', floorSymbol: '🎆', wallSymbol: '🚀', doorSymbol: '🚻'},
-  { env: 'desert', floorSymbol: '🏜', wallSymbol: '🔥', doorSymbol: '🚪'},
-  { env: 'snow', floorSymbol: '❄', wallSymbol: '🎄', doorSymbol: '🚪'}
+  { env: 'forest', floorColor: 'lightgreen', wallSymbol: '🌳', doorSymbol: '🚪'},
+  { env: 'spaceship', floorColor: 'lightgrey', wallSymbol: '🚀', doorSymbol: '🚻'},
+  { env: 'desert', floorColor: 'lightyellow', wallSymbol: '🔥', doorSymbol: '🚪'},
+  { env: 'snow', floorColor: 'snow', wallSymbol: '🎄', doorSymbol: '🚪'}
 ];
 
 const createTile = (x, y, wall = false, door = false) => {
