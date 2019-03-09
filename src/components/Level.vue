@@ -20,44 +20,19 @@ const Tile = {
   template: "{{ tile.type }}"
 };
 
-const getTile = type => {
-
-  switch (type) {
-    case "floor":
-      return "🔳";  
-    default:
-      return "⬛";
+const getTileType = (tile) => {
+  if(tile.isWall){
+    return "🌳"
+  }
+  if(!tile.content){
+    return "🍃"
   }
 
-}
+  if(tile.content.isPlayer){
+    return "🏃"
+  }
 
-const monsters = {
-  "turtle": "🐢",
-  "snake": "🐍",
-  "tiger": "🐅",
-  "gorilla": "🐒",
-  "ghost": "👻",
-  "alien": "👽",
-  "robot": "🤖",
-  "poo": "💩"
-}
-
-const getTileType = (tile) => {
-        if(tile.isWall){
-          return "🌳"
-        }
-        if(!tile.content){
-          return "🍃"
-        }
-
-
-        if(tile.content.isPlayer){
-          return "🏃"
-        }
-
-        if(tile.content.monsterType){
-          return monsters[tile.content.monsterType];
-        }
+  return tile.content.symbol;
 }
 
 const drawLevel = (level) => {
@@ -66,13 +41,6 @@ const drawLevel = (level) => {
   const columns = 30;
   const rows = 13;
   const tileSize = columns;
-
-  const sprites = {
-    "snake": "🐍",
-    "turtle": "🐢",
-    "gorilla": "🦍",
-    "tiger": "🐅"
-  }
 
   level.level.map((tile) => {
     tiles.push({

@@ -37,9 +37,18 @@ const containsAttackable = (tile) => {
   return tile.content && tile.content.health;
 }
 
+const containsItem = (tile) => {
+  return tile.content && tile.content.itemType;
+}
+
 const moveToTile = (originalPosition, tileToMove) => {
   tileToMove.content = originalPosition.content;
   originalPosition.content = undefined;
+}
+
+const takeItem = (player, tile) => {
+  player.inventory.backpack.push(tile.content);
+  tile.content = undefined;
 }
 
 const monstersTurn = (level) => {
@@ -67,6 +76,8 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
   if (canMoveToTile(tileToMove)) {
     moveToTile(playerPosition, tileToMove);
     monstersTurn(level);
+  } else if (containsItem(tileToMove)) {
+    takeItem(player, tileToMove);
   } else if (containsAttackable(tileToMove)) {
     combat(player, tileToMove.content, gameLog);
     const opponent = tileToMove.content;

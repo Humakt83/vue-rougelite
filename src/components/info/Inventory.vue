@@ -105,8 +105,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .inventory {
-  display: flex;
-  flex-wrap: wrap;
   margin-left: 3rem;
   .paperdoll {
     display: grid;
@@ -167,6 +165,7 @@ export default {
   }
 
   .backpack {
+    display: block;
     height: 100%;
     overflow-x: auto;
     overflow-y: hidden;

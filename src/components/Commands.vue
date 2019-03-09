@@ -11,10 +11,10 @@
 
 export default {
   methods: {
-      left: function(event) { this.$emit('move', 'left')},
-      right: function(event) { this.$emit('move', 'right')},
-      down: function(event) { this.$emit('move', 'down')},
-      up: function(event) { this.$emit('move', 'up')},
+    left: function(event) { this.$emit('move', 'left')},
+    right: function(event) { this.$emit('move', 'right')},
+    down: function(event) { this.$emit('move', 'down')},
+    up: function(event) { this.$emit('move', 'up')},
   }
 }
 
