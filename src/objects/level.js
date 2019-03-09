@@ -4,7 +4,12 @@ import { randomEnemy } from './monsters';
 import { randomWeapon } from './weapons';
 import { randomArmor } from './armor';
 
-const LEVEL_TYPES = ['jungle', 'spaceship', 'desert'];
+const LEVEL_TYPES = [
+  { env: 'jungle', floorSymbol: '🍃', wallSymbol: '🌳', doorSymbol: '🚪'},
+  { env: 'spaceship', floorSymbol: '🎆', wallSymbol: '🚀', doorSymbol: '🚻'},
+  { env: 'desert', floorSymbol: '🏜', wallSymbol: '🔥', doorSymbol: '🚪'},
+  { env: 'snow', floorSymbol: '❄', wallSymbol: '🎄', doorSymbol: '🚪'}
+];
 
 const createTile = (x, y, wall = false, door = false) => {
   return {
@@ -83,8 +88,11 @@ export default (columns, rows, player) => {
     return _.chain(level).filter(tile => tile.content && tile.content.health && !tile.content.isPlayer).value();
   }
 
+  const environment = LEVEL_TYPES[Math.floor(Math.random() * LEVEL_TYPES.length)];
+
   return {
     level: level,
+    environment,
     getPlayerPosition: getPlayerPosition,
     getTile: (x, y) => getTile(level, x, y),
     getMonsterPositions: getMonsterPositions
