@@ -65,7 +65,6 @@ export default {
     },
     changeLevel(result) {
       if (result.level) {
-        console.log(result);
         this.level = result.level;
         game.level = result.level;
       }

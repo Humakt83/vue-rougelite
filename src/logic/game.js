@@ -75,13 +75,16 @@ const monstersTurn = (level) => {
 
   level.getMonsterPositions().forEach(position => {
     const movableNeighbors = level.getNeighbors(position).filter(tile => playerPosition === tile || canMoveToTile(tile));
-    const tileToMove = findClosest(playerPosition, movableNeighbors, 3);
-    if (tileToMove && tileToMove === playerPosition) {
-      attackPlayer(position, tileToMove);
-    } else if (tileToMove) {
-      moveToTile(position, tileToMove);
+    const playerIsNear = movableNeighbors.some(tile => tile === playerPosition);
+    if (playerIsNear) {
+      attackPlayer(position, playerPosition);
     } else {
-      randomMove(level, position);
+      const tileToMove = findClosest(playerPosition, movableNeighbors, 3);
+      if (tileToMove) {
+        moveToTile(position, tileToMove);
+      } else {
+        randomMove(level, position);
+      }
     }
   });
 }
