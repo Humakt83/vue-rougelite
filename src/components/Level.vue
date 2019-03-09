@@ -20,12 +20,15 @@ const Tile = {
   template: "{{ tile.type }}"
 };
 
-const getTileType = (tile) => {
+const getTileType = (tile, environment) => {
+  if(tile.isDoor) {
+    return environment.doorSymbol;
+  }
   if(tile.isWall){
-    return "🌳"
+    return environment.wallSymbol;
   }
   if(!tile.content){
-    return "🍃"
+    return environment.floorSymbol;
   }
 
   if(tile.content.isPlayer){
@@ -36,15 +39,14 @@ const getTileType = (tile) => {
 }
 
 const drawLevel = (level) => {
-  // console.log(JSON.stringify(level))
   const tiles = [];
   const columns = 30;
   const rows = 13;
   const tileSize = columns;
 
-  level.level.map((tile) => {
+  level.level.forEach((tile) => {
     tiles.push({
-      type: getTileType(tile),
+      type: getTileType(tile, level.environment),
       x: tile.x * (100 / columns),
       y: tile.y * (100 / rows)
     })

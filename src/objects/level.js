@@ -4,12 +4,20 @@ import { randomEnemy } from './monsters';
 import { randomWeapon } from './weapons';
 import { randomArmor } from './armor';
 
-const createTile = (x, y, wall) => {
+const LEVEL_TYPES = [
+  { env: 'jungle', floorSymbol: '🍃', wallSymbol: '🌳', doorSymbol: '🚪'},
+  { env: 'spaceship', floorSymbol: '🎆', wallSymbol: '🚀', doorSymbol: '🚻'},
+  { env: 'desert', floorSymbol: '🏜', wallSymbol: '🔥', doorSymbol: '🚪'},
+  { env: 'snow', floorSymbol: '❄', wallSymbol: '🎄', doorSymbol: '🚪'}
+];
+
+const createTile = (x, y, wall = false, door = false) => {
   return {
     content: undefined,
     x: x,
     y: y,
-    isWall: !!wall
+    isWall: wall,
+    isDoor: door,
   }
 }
 
@@ -22,7 +30,7 @@ const place = (level, content, columns, rows) => {
   const y = Math.floor(Math.random() * rows);
   const tile = getTile(level, x, y);
 
-  if (!tile.isWall && !tile.content) {
+  if (!tile.isWall && !tile.content && !tile.isDoor) {
     tile.content = content;
   } else {
     place(level, content, columns, rows);
@@ -42,11 +50,24 @@ export default (columns, rows, player) => {
     }
   }
 
-  for (let i = 0; i < numberOfWalls; i++) {
-    level[Math.floor(Math.random()*level.length)].isWall = true;
+  getTile(level, 1, 1).content = player;
+
+  let doorPlaced = false;
+  while (!doorPlaced) {
+    const position = Math.floor(Math.random()*level.length);
+    if (!level[position].content) {
+      level[position].isDoor = true;
+      doorPlaced = true;
+    }
   }
 
-  getTile(level, 1, 1).content = player;
+  for (let i = 0; i < numberOfWalls; i++) {
+    const position = Math.floor(Math.random()*level.length);
+    if (!level[position].content && !level[position].isDoor) {
+      level[position].isWall = true;
+    }
+  }
+
   for (let i = 0; i < numberOfEnemies; i++) {
     place(level, randomEnemy(), columns, rows);
   }
@@ -67,8 +88,11 @@ export default (columns, rows, player) => {
     return _.chain(level).filter(tile => tile.content && tile.content.health && !tile.content.isPlayer).value();
   }
 
+  const environment = LEVEL_TYPES[Math.floor(Math.random() * LEVEL_TYPES.length)];
+
   return {
     level: level,
+    environment,
     getPlayerPosition: getPlayerPosition,
     getTile: (x, y) => getTile(level, x, y),
     getMonsterPositions: getMonsterPositions

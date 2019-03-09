@@ -7,30 +7,12 @@ let gameOver = false;
 const columns = 30;
 const rows = 13;
 const player = Player();
-const level = Level(columns, rows, player);
+const createLevel = () => Level(columns, rows, player);
+const level = createLevel();
 const gameLog = ['Welcome to the jungle!'];
 
-const move = (direction) => {
-  if (gameOver) {
-    return;
-  }
-  const playerPosition = level.getPlayerPosition();
-  if (direction === 'left' && playerPosition.x > 0) {
-    handleMoveAction(level, player, playerPosition, -1, 0);
-  }
-  if (direction === 'right' && playerPosition.x < columns - 1) {
-    handleMoveAction(level, player, playerPosition, 1, 0);
-  }
-  if (direction === 'down' && playerPosition.y < rows - 1) {
-    handleMoveAction(level, player, playerPosition, 0, 1);
-  }
-  if (direction === 'up' && playerPosition.y > 0) {
-    handleMoveAction(level, player, playerPosition, 0, -1);
-  }
-};
-
 const canMoveToTile = (tileToMove) => {
-  return !tileToMove.isWall && !tileToMove.content;
+  return !tileToMove.isWall && !tileToMove.isDoor && !tileToMove.content;
 }
 
 const containsAttackable = (tile) => {
@@ -85,10 +67,13 @@ const levelUp = (gameLog, player) => {
 }
 
 const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustment) => {
+  let levelNew = undefined;
   const tileToMove = level.getTile(playerPosition.x + xAdjustment, playerPosition.y + yAdjustment);
   if (canMoveToTile(tileToMove)) {
     moveToTile(playerPosition, tileToMove);
     monstersTurn(level);
+  } else if (tileToMove.isDoor) {
+    levelNew = createLevel()
   } else if (containsItem(tileToMove)) {
     takeItem(player, tileToMove);
   } else if (containsAttackable(tileToMove)) {
@@ -104,12 +89,30 @@ const handleMoveAction = (level, player, playerPosition, xAdjustment, yAdjustmen
     }
     monstersTurn(level);
   }
+  return {level: levelNew};
 }
 
 export default () => {
   return {
     level: level,
-    move: move,
+    move(direction) {
+      if (gameOver) {
+        return {};
+      }
+      const playerPosition = this.level.getPlayerPosition();
+      if (direction === 'left' && playerPosition.x > 0) {
+        return handleMoveAction(this.level, player, playerPosition, -1, 0);
+      }
+      if (direction === 'right' && playerPosition.x < columns - 1) {
+        return handleMoveAction(this.level, player, playerPosition, 1, 0);
+      }
+      if (direction === 'down' && playerPosition.y < rows - 1) {
+        return handleMoveAction(this.level, player, playerPosition, 0, 1);
+      }
+      if (direction === 'up' && playerPosition.y > 0) {
+        return handleMoveAction(this.level, player, playerPosition, 0, -1);
+      }
+    },
     player: player,
     gameLog: gameLog
   }
