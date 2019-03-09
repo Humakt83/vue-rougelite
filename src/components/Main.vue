@@ -12,6 +12,7 @@
     <div class="logArea">
       <Log :gameLog="gameLog"/>
     </div>
+    <GameOver v-if="player.health <= 0" />
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import Info from './info/Info';
 import Log from './Log';
 import Game from '../logic/game';
 import Commands from './Commands';
+import GameOver from './GameOver';
 
 const game = Game();
 
@@ -43,7 +45,8 @@ export default {
     Level,
     Info,
     Log,
-    Commands
+    Commands,
+    GameOver
   },
   mounted() {
     const that = this;

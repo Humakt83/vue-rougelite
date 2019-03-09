@@ -2,8 +2,6 @@ import Player from '../objects/player';
 import Level from '../objects/level';
 import combat from './combat'; 
 
-let gameOver = false;
-
 const columns = 30;
 const rows = 13;
 const player = Player();
@@ -56,7 +54,6 @@ const attackPlayer = (position, tileToMove) => {
   setAttackAnimation(tileToMove);
   if (tileToMove.content.health <= 0) {
     tileToMove.content = undefined;
-    gameOver = true;
     gameLog.unshift('GAME OVER!!!');
   }
 }
@@ -138,8 +135,8 @@ export default () => {
   return {
     level: level,
     move(direction) {
-      if (gameOver) {
-        return {};
+      if (player.health <= 0) {
+        return {}
       }
       const playerPosition = this.level.getPlayerPosition();
       if (direction === 'left' && playerPosition.x > 0) {
