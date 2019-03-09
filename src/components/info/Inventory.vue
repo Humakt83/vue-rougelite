@@ -44,7 +44,7 @@
 <script>
 
 export default {
-  props: ['inventory'],
+  props: ['inventory', 'player'],
   data() {
     return {
       selected: undefined,
@@ -78,7 +78,7 @@ export default {
       if (!this.selectedItem || this.selected === undefined) {
         return false;
       }
-      return slotType.includes(this.selectedItem.slot);
+      return this.selectedItem.itemType === 'consumable' || slotType.includes(this.selectedItem.slot);
     },
     move(slotType, handPrefix = '') {
       if (!this.selectableBodySlot(slotType)) {
@@ -90,7 +90,11 @@ export default {
       if (!!this.inventory[handPrefix + this.selectedItem.slot]) {
         this.inventory.backpack.push(this.inventory[handPrefix + this.selectedItem.slot]);
       }
-      this.inventory[handPrefix + this.selectedItem.slot] = this.selectedItem;      
+      if (this.selectedItem.itemType === 'consumable') {
+        this.selectedItem.effect(this.player);
+      } else {
+        this.inventory[handPrefix + this.selectedItem.slot] = this.selectedItem;      
+      }
       this.unselect();
     },
     unselect() {

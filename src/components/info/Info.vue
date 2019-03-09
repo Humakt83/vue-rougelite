@@ -2,7 +2,7 @@
   <div class="Info">
     <template v-if="player.health > 0">
       <Stats :player="player"/>
-      <Inventory :inventory="player.inventory"/>    
+      <Inventory :inventory="player.inventory" :player="player"/>    
     </template>
     <template v-else>
       <h1>DÖÖD</h1>
