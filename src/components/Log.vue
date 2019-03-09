@@ -27,7 +27,7 @@ export default {
 <style scoped lang="scss">
   .logArea {
     width: 98%;
-    height: 25vh;
+    height: 23vh;
     position: relative;
     font-size: 16px;
   }
