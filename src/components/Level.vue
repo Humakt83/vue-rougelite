@@ -1,8 +1,6 @@
 <template>
   <div class="level" :style="{'background-color': color}">
-    <div class="tile" v-for="(tile, index) in tiles"
-    :key="index"
-    :style="{left: tile.x + '%', top: tile.y + '%'}">
+    <div class="tile" v-for="(tile, index) in tiles" :key="index">
       <span>{{ tile.type }}</span>
       <template v-if="tile.animation">
         <span class="animation">💥</span>
@@ -19,7 +17,7 @@ const getTileType = (tile, environment) => {
     return environment.wallSymbol;
   }
   if (!tile.content){
-    return '';
+    return '.';
   }
   if (tile.content.isPlayer){
     return "🏃"
@@ -56,7 +54,7 @@ export default {
       return this.level.environment.floorColor;
     }
   }
-  };
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
