@@ -71,7 +71,6 @@ a {
   color: #42b983;
 }
 .level {
-  border: solid 2px black;
   display: grid;
   grid-template-columns: repeat(30, 3.33%);
   align-items: center;

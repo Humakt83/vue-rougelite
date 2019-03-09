@@ -79,7 +79,6 @@ export default {
   .levelArea, .infoArea {
     width: 75%;
     min-height: 75%;
-    border: 2px solid black;
     position: absolute;
     top: 0;
     left: 0;
@@ -110,7 +109,6 @@ export default {
     top: 75%;
     width: 70%;
     min-height: 25%;
-    border: 2px solid black;
     margin: -6px;
   }
 
