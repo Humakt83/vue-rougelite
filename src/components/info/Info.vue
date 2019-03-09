@@ -1,6 +1,5 @@
 <template>
   <div class="Info">
-    <h3>Info</h3>
     <template v-if="player.health > 0">
       <Stats :player="player"/>
       <Inventory :inventory="player.inventory"/>    

@@ -47,7 +47,9 @@ const moveToTile = (originalPosition, tileToMove) => {
 }
 
 const takeItem = (player, tile) => {
-  player.inventory.backpack.push(tile.content);
+  const item = tile.content;
+  player.inventory.backpack.push(item);
+  gameLog.unshift(`Picked up ${item.symbol} (defense bonus: ${item.defenseBonus | 0}, attack bonus: ${item.attackBonus | 0})`)
   tile.content = undefined;
 }
 
