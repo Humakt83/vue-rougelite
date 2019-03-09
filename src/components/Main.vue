@@ -1,16 +1,16 @@
 <template>
   <div class="main">
     <div class="levelArea">
-      <Level :level="game.level" />
+      <Level :level="level" />
     </div>
     <div class="infoArea">
-      <Info :player="game.player"/>
+      <Info :player="player"/>
     </div>
     <div class="commandsArea">
       <Commands @move="move"></Commands>
     </div>
     <div class="logArea">
-      <Log :gameLog="game.gameLog"/>
+      <Log :gameLog="gameLog"/>
     </div>
   </div>
 </template>
@@ -31,20 +31,13 @@ const keyCommands = {
   'ArrowDown': () => game.move('down'),
 }
 
-window.addEventListener('keydown', (e) => {
-  const {key, shiftKey, ctrlKey, altKey} = e
-
-  const modifiers = shiftKey || ctrlKey || altKey
-
-  if (!modifiers && keyCommands.hasOwnProperty(key) && typeof keyCommands[key] === 'function') {
-    const cmd = keyCommands[key]
-    cmd()
-  }
-})
-
 export default {
   data:() => {
-    return {game: game}
+    return {
+      level: game.level,
+      player: game.player,
+      gameLog: game.gameLog,
+    }
   },
   components: {
     Level,
@@ -52,8 +45,31 @@ export default {
     Log,
     Commands
   },
+  mounted() {
+    const that = this;
+    window.addEventListener('keydown', (e) => {
+      const {key, shiftKey, ctrlKey, altKey} = e
+
+      const modifiers = shiftKey || ctrlKey || altKey
+
+      if (!modifiers && keyCommands.hasOwnProperty(key) && typeof keyCommands[key] === 'function') {
+        const cmd = keyCommands[key]
+        that.changeLevel(cmd());
+      }
+    })
+  },
   methods: {
-    move: (direction) => game.move(direction)
+    move(direction) {
+      const result = game.move(direction)
+      this.changeLevel(result);
+    },
+    changeLevel(result) {
+      if (result.level) {
+        console.log(result);
+        this.level = result.level;
+        game.level = result.level;
+      }
+    }
   }
 }
 

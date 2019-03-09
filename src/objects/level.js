@@ -25,7 +25,7 @@ const place = (level, content, columns, rows) => {
   const y = Math.floor(Math.random() * rows);
   const tile = getTile(level, x, y);
 
-  if (!tile.isWall && !tile.content) {
+  if (!tile.isWall && !tile.content && !tile.isDoor) {
     tile.content = content;
   } else {
     place(level, content, columns, rows);

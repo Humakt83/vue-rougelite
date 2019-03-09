@@ -44,7 +44,7 @@ const drawLevel = (level) => {
   const rows = 13;
   const tileSize = columns;
 
-  level.level.map((tile) => {
+  level.level.forEach((tile) => {
     tiles.push({
       type: getTileType(tile),
       x: tile.x * (100 / columns),
