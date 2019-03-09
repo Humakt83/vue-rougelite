@@ -13,6 +13,7 @@
       <Log :gameLog="gameLog"/>
     </div>
     <GameOver v-if="player.health <= 0" />
+    <Victory v-if="victory" />
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import Log from './Log';
 import Game from '../logic/game';
 import Commands from './Commands';
 import GameOver from './GameOver';
+import Victory from './Victory';
 
 const game = Game();
 
@@ -46,7 +48,8 @@ export default {
     Info,
     Log,
     Commands,
-    GameOver
+    GameOver,
+    Victory
   },
   mounted() {
     const that = this;
@@ -60,6 +63,11 @@ export default {
         that.changeLevel(cmd());
       }
     })
+  },
+  computed: {
+    victory() {
+      return !!this.player.winner;
+    }
   },
   methods: {
     move(direction) {
