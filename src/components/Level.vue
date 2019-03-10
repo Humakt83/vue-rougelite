@@ -86,8 +86,8 @@ a {
   margin: 0;
   padding: 0;
   user-select: none;
-  width: 100%;
-  height: 100%;
+  width: calc(75vh / 13 - 13px);
+  height: calc(75vh / 13 - 13px);
   margin-top: 4px;
   position: relative;
 }
