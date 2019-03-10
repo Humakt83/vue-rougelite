@@ -17,7 +17,7 @@ const getTileType = (tile, environment) => {
     return environment.wallSymbol;
   }
   if (!tile.content){
-    return '.';
+    return '';
   }
   if (tile.content.isPlayer){
     return "🏃"
@@ -76,6 +76,7 @@ a {
 .level {
   display: grid;
   grid-template-columns: repeat(30, 3.33%);
+  grid-template-rows: repeat(13, 7,69%);
   align-items: center;
   width: calc(75vw - 4px);
   height: calc(75vh - 4px);
