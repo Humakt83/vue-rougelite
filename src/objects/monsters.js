@@ -44,6 +44,13 @@ export const robot = () => {
   return createMonster(15, 15, 50, 'robot', 15, 25, '🤖');
 }
 
+const enviromentalMonsters = {
+  desert: [snake, poo, turtle],
+  snow: [poo, ghost],
+  spaceship: [robot, alien],
+  forest: [tiger, gorilla, snake, turtle]
+}
+
 export const randomEnemy = () => {
   const enemies = [turtle, snake, tiger, gorilla, alien, poo, robot, ghost];
   return enemies[Math.floor(Math.random() * enemies.length)]();
