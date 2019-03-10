@@ -18,8 +18,8 @@ export default () => {
       backpack: []
     },
     isPlayer: true,
-    getDefense() {
-      const combatBonusFromItems = [
+    getDefenseBonus() {
+      return [
         this.inventory.head,
         this.inventory.torso,
         this.inventory.lefthand,
@@ -28,17 +28,21 @@ export default () => {
         .filter(item => !!item)
         .map(item => item.defenseBonus | 0)
         .reduce((prev, current) => prev + current, 0);
-      const defenseMultiplier = 1 + (combatBonusFromItems / 100);
+    },
+    getDefense() {
+      const defenseMultiplier = 1 + (this.getDefenseBonus() / 100);
       return this.defense * defenseMultiplier;
     },
-    getAttack() {
-      const combatBonusFromItems = [
+    getAttackBonus() {
+      return [
         this.inventory.lefthand,
         this.inventory.righthand]
         .filter(item => !!item)
         .map(item => item.attackBonus | 0)
         .reduce((prev, current) => prev + current, 0);
-      const attackMultiplier = 1 + (combatBonusFromItems / 100);
+    },
+    getAttack() {
+      const attackMultiplier = 1 + (this.getAttackBonus() / 100);
       return this.attack * attackMultiplier;
     }
   }
