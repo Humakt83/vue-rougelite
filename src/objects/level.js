@@ -107,7 +107,7 @@ export default (columns, rows, player, currentLevel = 1) => {
   }
 
   if (currentLevel >= FINAL_LEVEL) {
-    place(level, {symbol: '💰', type: 'treasure'}, columns, rows);
+    place(level, {symbol: '💰', type: 'treasure', text: '💰: win the game'}, columns, rows);
   }
   
   const getPlayerPosition = () => {

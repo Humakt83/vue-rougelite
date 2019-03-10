@@ -25,6 +25,19 @@ const getTileType = (tile, environment) => {
   return tile.content.symbol;
 }
 
+const getText = (tile, environment) => {
+  if(tile.isDoor) {
+    return `${environment.doorSymbol}: exits the level`;
+  }
+  if (tile.isWall || !tile.content){
+    return undefined;
+  }
+  if (tile.content.isPlayer){
+    return "🏃: You"
+  }
+  return tile.content.text;
+}
+
 const drawLevel = (level) => {
   const tiles = [];
   const columns = 30;
@@ -36,7 +49,7 @@ const drawLevel = (level) => {
       tiles.push({
         type: getTileType(tile, level.environment),
         animation: tile.animation,
-        text: tile.content ? tile.content.text : undefined,
+        text: getText(tile, level.environment),
       });
     }
   }
