@@ -1,6 +1,6 @@
 <template>
-  <div class="inventory">
-    <h3>Inventory</h3>
+  <fieldset class="inventory">
+    <legend>Inventory</legend>
     <div class="paperdoll">
       <div class="head" :class="{'selectable': headSelectable}" @click="move('head')">
         <span v-if="inventory.head">
@@ -34,11 +34,12 @@
       </div>
     </div>
     <div class="backpack">
+      <div class="backpackSlot placeHolder" v-if="inventory.backpack.length < 1">🎒</div>
       <div class="backpackSlot" :class="{'selected': index === selected}" v-for="(item, index) in inventory.backpack" :key="index" @click="select(item, index)">
         <span>{{ item.symbol }}</span>
       </div>
     </div>
-  </div>
+  </fieldset>
 </template>
 
 <script>
@@ -109,7 +110,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .inventory {
-  margin-left: 3rem;
+  margin-top: 0.5rem;
   .paperdoll {
     display: grid;
     grid-template-columns: 40px 40px 40px;
@@ -118,7 +119,6 @@ export default {
       ". head ."
       "left torso right"
       ". feet .";
-    padding: 1rem 2rem;
     div {
       border-radius: 2px;
       width: 40px;
@@ -191,6 +191,15 @@ export default {
     }
     &.selected {
       background-color: lightgoldenrodyellow;
+    }
+    &.placeHolder {
+      cursor: default;
+      opacity: 0.4;
+      background-color: white;
+      border: 1px solid white;
+      &:hover {
+        background-color: white;
+      }
     }
   }
 }

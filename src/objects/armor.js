@@ -25,8 +25,7 @@ const splintmail = () => {
     defenseBonus: 40,
     itemType: 'armor',
     slot: 'torso',
-    symbol: '👕',
-    text: armorText(this)
+    symbol: '👕'
   }
 }
 

@@ -104,7 +104,6 @@ export default {
   .infoArea {
     left: 75%;
     width: 25%;
-    min-height: 75%;
   }
 
   .commandsArea {

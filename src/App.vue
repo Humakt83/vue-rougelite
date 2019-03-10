@@ -24,6 +24,11 @@ export default {
   color: #2c3e50;
 }
 
+legend {
+  font-weight: bolder;
+  font-size: normal;
+}
+
 .tooltip {
   display: block;
   z-index: 10000;
