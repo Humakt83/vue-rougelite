@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { randomEnemy } from './monsters';
+import { randomEnemyFromEnvironment } from './monsters';
 import { randomWeapon } from './weapons';
 import { randomArmor } from './armor';
 import { randomConsumable } from './consumables';
@@ -12,7 +12,7 @@ const LEVEL_TYPES = [
   { env: 'snow', floorColor: 'snow', wallSymbol: '🎄', doorSymbol: '🚪'}
 ];
 
-const FINAL_LEVEL = 2;
+const FINAL_LEVEL = 5;
 
 const createTile = (x, y, wall = false, door = false) => {
   return {
@@ -56,6 +56,7 @@ export default (columns, rows, player, currentLevel = 1) => {
   const numberOfWeapons = 1;
   const numberOfConsumables = 3;
   const numberOfWalls = (columns * rows) / Math.max(10, Math.floor(Math.random() * 20));
+  const environment = LEVEL_TYPES[Math.floor(Math.random() * LEVEL_TYPES.length)];
   const level = [];
   
   for (let x = 0; x < columns; x++) {
@@ -84,7 +85,7 @@ export default (columns, rows, player, currentLevel = 1) => {
 
   let remainingMonsterScore = 500 * currentLevel;
   while (remainingMonsterScore > 0) {
-    const monster = randomEnemy();
+    const monster = randomEnemyFromEnvironment(environment.env);
     remainingMonsterScore -= monster.experience;
     place(level, monster, columns, rows);
   }
@@ -113,7 +114,6 @@ export default (columns, rows, player, currentLevel = 1) => {
     return _.chain(level).filter(tile => tile.content && tile.content.health && !tile.content.isPlayer).value();
   }
 
-  const environment = LEVEL_TYPES[Math.floor(Math.random() * LEVEL_TYPES.length)];
 
   return {
     level: level,

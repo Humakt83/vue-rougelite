@@ -88,7 +88,7 @@ const monstersTurn = (level) => {
     if (playerIsNear) {
       attackPlayer(position, playerPosition);
     } else {
-      const tileToMove = findClosest(playerPosition, movableNeighbors, 3);
+      const tileToMove = findClosest(playerPosition, movableNeighbors, position.content.radius);
       if (tileToMove) {
         moveToTile(position, tileToMove);
       } else {

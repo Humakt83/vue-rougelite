@@ -1,14 +1,15 @@
-const createMonster = (attack, defense, health, monsterType, minDamage, maxDamage, symbol) => {
+const createMonster = (attack, defense, health, monsterType, minDamage, maxDamage, symbol, radius = 3) => {
   const score = attack + defense + health + minDamage + maxDamage;
   return {
-    attack: attack,
-    defense: defense,
-    health: health,
-    minDamage: minDamage,
-    maxDamage: maxDamage,
-    monsterType: monsterType,
+    attack,
+    defense,
+    health,
+    minDamage,
+    maxDamage,
+    monsterType,
     experience: score,
-    symbol: symbol
+    symbol,
+    radius
   }
 }
 
@@ -17,7 +18,7 @@ export const snake = () => {
 }
 
 export const turtle = () => {
-  return createMonster(3, 10, 30, 'turtle', 5, 10, '🐢');
+  return createMonster(3, 10, 30, 'turtle', 5, 10, '🐢', 1);
 }
 
 export const gorilla = () => {
@@ -25,23 +26,23 @@ export const gorilla = () => {
 }
 
 export const tiger = () => {
-  return createMonster(15, 7, 40, 'tiger', 15, 20, '🐅');
+  return createMonster(15, 7, 40, 'tiger', 15, 20, '🐅', 5);
 }
 
 export const poo = () => {
-  return createMonster(1, 1, 5, 'poo', 1, 2, '💩');
+  return createMonster(1, 1, 5, 'poo', 1, 2, '💩', 1);
 }
 
 export const ghost = () => {
-  return createMonster(5, 30, 5, 'ghost', 1, 5, '👻');
+  return createMonster(5, 30, 5, 'ghost', 1, 5, '👻', 5);
 }
 
 export const alien = () => {
-  return createMonster(10, 10, 25, 'alien', 10, 20, '👽');
+  return createMonster(10, 10, 25, 'alien', 10, 20, '👽', 5);
 }
 
 export const robot = () => {
-  return createMonster(15, 15, 50, 'robot', 15, 25, '🤖');
+  return createMonster(15, 15, 50, 'robot', 15, 25, '🤖', 30);
 }
 
 const enviromentalMonsters = {
@@ -49,6 +50,11 @@ const enviromentalMonsters = {
   snow: [poo, ghost],
   spaceship: [robot, alien],
   forest: [tiger, gorilla, snake, turtle]
+}
+
+export const randomEnemyFromEnvironment = (env) => {
+  const enemies = enviromentalMonsters[env];
+  return enemies[Math.floor(Math.random() * enemies.length)]();
 }
 
 export const randomEnemy = () => {
