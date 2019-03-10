@@ -17,7 +17,16 @@ export const hammer = () => {
   }
 }
 
+export const knife = () => {
+  return {
+    attackBonus: 20,
+    itemType: 'weapon',
+    slot: 'hand',
+    symbol: '🔪'
+  }
+}
+
 export const randomWeapon = () => {
-  const weapons = [sword, hammer];
+  const weapons = [sword, hammer, knife];
   return weapons[Math.floor(Math.random() * weapons.length)]();
 };

@@ -8,8 +8,12 @@ import { randomConsumable } from './consumables';
 const LEVEL_TYPES = [
   { env: 'forest', floorColor: 'lightgreen', wallSymbol: '🌳', doorSymbol: '🚪'},
   { env: 'spaceship', floorColor: 'lightgrey', wallSymbol: '🚀', doorSymbol: '🚻'},
-  { env: 'desert', floorColor: 'lightyellow', wallSymbol: '🔥', doorSymbol: '🚪'},
-  { env: 'snow', floorColor: 'snow', wallSymbol: '🎄', doorSymbol: '🚪'}
+  { env: 'desert', floorColor: 'lightyellow', wallSymbol: '🌵', doorSymbol: '🚪'},
+  { env: 'snow', floorColor: 'snow', wallSymbol: '🎄', doorSymbol: '🚪'},
+  { env: 'town', floorColor: 'tan', wallSymbol: '🏠', doorSymbol: '🚪'},
+  { env: 'ocean', floorColor: 'cyan', wallSymbol: '⚓', doorSymbol: '🚪'},
+  { env: 'hell', floorColor: 'red', wallSymbol: '🔥', doorSymbol: '🚪'},
+  { env: 'jungle', floorColor: 'darkgreen', wallSymbol: '🌴', doorSymbol: '🚪'}
 ];
 
 const FINAL_LEVEL = 5;
