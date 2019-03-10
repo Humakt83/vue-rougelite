@@ -1,5 +1,6 @@
 const createMonster = (attack, defense, health, monsterType, minDamage, maxDamage, symbol, radius = 3) => {
   const score = (attack + defense + health + minDamage + maxDamage) * 1.25;
+  const text = `${symbol}: ${monsterType} (health: ${health}, attack: ${attack}, defense: ${defense}, damage: ${minDamage}-${maxDamage})`;
   return {
     attack,
     defense,
@@ -9,7 +10,8 @@ const createMonster = (attack, defense, health, monsterType, minDamage, maxDamag
     monsterType,
     experience: score,
     symbol,
-    radius
+    radius,
+    text
   }
 }
 

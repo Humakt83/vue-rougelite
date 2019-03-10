@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="backpack">
-      <div class="backpackSlot" :class="{'selected': index === selected}" v-for="(item, index) in inventory.backpack" :key="index" @click="select(item, index)">
+      <div class="backpackSlot" :class="{'selected': index === selected}" v-for="(item, index) in inventory.backpack" :key="index" @click="select(item, index)" v-tooltip.bottom-start="item.text">
         <span>{{ item.symbol }}</span>
       </div>
     </div>

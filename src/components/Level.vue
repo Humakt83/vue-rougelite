@@ -1,6 +1,6 @@
 <template>
   <div class="level" :style="{'background-color': color}">
-    <div class="tile" v-for="(tile, index) in tiles" :key="index">
+    <div class="tile" v-for="(tile, index) in tiles" :key="index" v-tooltip.right="tile.text">
       <span>{{ tile.type }}</span>
       <template v-if="tile.animation">
         <span class="animation">💥</span>
@@ -35,7 +35,8 @@ const drawLevel = (level) => {
       const tile = level.getTile(x, y);
       tiles.push({
         type: getTileType(tile, level.environment),
-        animation: tile.animation
+        animation: tile.animation,
+        text: tile.content ? tile.content.text : undefined,
       });
     }
   }

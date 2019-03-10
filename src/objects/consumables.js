@@ -4,7 +4,8 @@ export const beer = () => {
     effect: (player) => {
       player.health = Math.min(player.maxHealth, player.health + 50);
     },
-    symbol: '🍺'
+    symbol: '🍺',
+    text: '🍺: restores 50 health'
   }
 }
 
@@ -14,7 +15,8 @@ export const coffee = () => {
     effect: (player) => {
       player.health = Math.min(player.maxHealth, player.health + 20);
     },
-    symbol: '☕'
+    symbol: '☕',
+    text: '☕: restores 20 health'
   }
 }
 
@@ -24,7 +26,8 @@ export const apple = () => {
     effect: (player) => {
       player.health = Math.min(player.maxHealth, player.health + 25);
     },
-    symbol: '🍎'
+    symbol: '🍎',
+    text: '🍎: restores 25 health'
   }
 }
 
@@ -34,7 +37,8 @@ export const bread = () => {
     effect: (player) => {
       player.health = Math.min(player.maxHealth, player.health + 30);
     },
-    symbol: '🍞'
+    symbol: '🍞',
+    text: '🍞: restores 30 health'
   }
 }
 
@@ -44,7 +48,8 @@ export const hamburger = () => {
     effect: (player) => {
       player.health = Math.min(player.maxHealth, player.health + 40);
     },
-    symbol: '🍔'
+    symbol: '🍔',
+    text: '🍔: restores 40 health'
   }
 }
 

@@ -1,3 +1,8 @@
+const weaponText = (weapon) => {
+  const defenseBonus = weapon.defenseBonus ? ` and ${weapon.defenseBonus}% bonus to defense` : '';
+  return `${weapon.symbol}: ${weapon.attackBonus}% bonus to attack${defenseBonus}`;
+}
+
 export const sword = () => {
   return {
     attackBonus: 50,
@@ -28,5 +33,6 @@ export const knife = () => {
 
 export const randomWeapon = () => {
   const weapons = [sword, hammer, knife];
-  return weapons[Math.floor(Math.random() * weapons.length)]();
+  const weapon = weapons[Math.floor(Math.random() * weapons.length)]();
+  return Object.assign(weapon, {text: weaponText(weapon)});
 };

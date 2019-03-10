@@ -1,45 +1,50 @@
-export const platemail = () => {
+const armorText = (armor) => {
+  return `${armor.symbol}: ${armor.defenseBonus}% bonus to defense`;
+}
+
+const platemail = () => {
   return {
     defenseBonus: 50,
     itemType: 'armor',
     slot: 'torso',
-    symbol: '👘'
+    symbol: '👘',
   }
 }
 
-export const chainmail = () => {
+const chainmail = () => {
   return {
     defenseBonus: 20,
     itemType: 'armor',
     slot: 'torso',
-    symbol: '👗'
+    symbol: '👗',
   }
 }
 
-export const splintmail = () => {
+const splintmail = () => {
   return {
     defenseBonus: 40,
     itemType: 'armor',
     slot: 'torso',
-    symbol: '👕'
+    symbol: '👕',
+    text: armorText(this)
   }
 }
 
-export const bikini = () => {
+const bikini = () => {
   return {
     defenseBonus: 10,
     itemType: 'armor',
     slot: 'torso',
-    symbol: '👙'
+    symbol: '👙',
   }
 }
 
-export const kiteShield = () => {
+const kiteShield = () => {
   return {
     defenseBonus: 20,
     itemType: 'armor',
     slot: 'hand',
-    symbol: '🛡'
+    symbol: '🛡',
   }
 }
 
@@ -48,7 +53,7 @@ export const buckler = () => {
     defenseBonus: 10,
     itemType: 'armor',
     slot: 'hand',
-    symbol: '💿'
+    symbol: '💿',
   }
 }
 
@@ -75,7 +80,7 @@ export const boots = () => {
     defenseBonus: 15,
     itemType: 'armor',
     slot: 'feet',
-    symbol: '👟'
+    symbol: '👟',
   }
 }
 
@@ -84,7 +89,7 @@ export const shoes = () => {
     defenseBonus: 10,
     itemType: 'armor',
     slot: 'feet',
-    symbol: '👠'
+    symbol: '👠',
   }
 }
 
@@ -93,11 +98,12 @@ export const socks = () => {
     defenseBonus: 5,
     itemType: 'armor',
     slot: 'feet',
-    symbol: '🧦'
+    symbol: '🧦',
   }
 }
 
 export const randomArmor = () => {
   const armors = [platemail, helmet, boots, buckler, chainmail, splintmail, kiteShield, socks, bikini, hat, shoes];
-  return armors[Math.floor(Math.random() * armors.length)]();
+  const armor = armors[Math.floor(Math.random() * armors.length)]();
+  return Object.assign(armor, {text: armorText(armor)});
 };
