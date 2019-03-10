@@ -9,6 +9,9 @@ let currentLevel = 1;
 const createLevel = () => Level(columns, rows, player, currentLevel++);
 const level = createLevel();
 const gameLog = ['Welcome weary traveler!'];
+gameLog.push('Your search for 💰 is at hand.');
+gameLog.push('Enter 🚪 to progress into the next level.');
+gameLog.push('Be wary of scary monsters!');
 
 const canMoveToTile = (tileToMove) => {
   return !tileToMove.isWall && !tileToMove.isDoor && !tileToMove.content;
