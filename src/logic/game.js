@@ -4,14 +4,10 @@ import combat from './combat';
 
 const columns = 30;
 const rows = 13;
-const player = Player();
+const gameLog = [];
 let currentLevel = 1;
-const createLevel = () => Level(columns, rows, player, currentLevel++);
-const level = createLevel();
-const gameLog = ['Welcome weary traveler!'];
-gameLog.push('Your search for 💰 is at hand.');
-gameLog.push('Enter 🚪 to progress into the next level.');
-gameLog.push('Be wary of scary monsters!');
+
+const createLevel = (player) => Level(columns, rows, player, currentLevel++);
 
 const canMoveToTile = (tileToMove) => {
   return !tileToMove.isWall && !tileToMove.isDoor && !tileToMove.content;
@@ -119,7 +115,7 @@ function handleMoveAction(level, player, playerPosition, xAdjustment, yAdjustmen
     moveToTile(playerPosition, tileToMove);
     monstersTurn(level);
   } else if (tileToMove.isDoor) {
-    levelNew = createLevel()
+    levelNew = createLevel(player)
   } else if (containsItem(tileToMove)) {
     takeItem(player, tileToMove);
   } else if (containsTreasure(tileToMove)) {
@@ -141,9 +137,18 @@ function handleMoveAction(level, player, playerPosition, xAdjustment, yAdjustmen
   return {level: levelNew};
 }
 
-export default () => {
+const createNewGame = () => {
+  const player = Player();
+  currentLevel = 1;
+  const level = createLevel(player);
+  gameLog.unshift('Be wary of scary monsters!');
+  gameLog.unshift('Your search for 💰 is at hand.');
+  gameLog.unshift('Enter 🚪 to progress into the next level.');
+  gameLog.unshift('Welcome weary traveler!');
+  
   return {
-    level: level,
+    player,
+    level,
     move(direction) {
       if (this.player.health <= 0) {
         return {}
@@ -162,8 +167,7 @@ export default () => {
         return handleMoveAction(this.level, this.player, playerPosition, 0, -1);
       }
     },
-    player,
-    gameLog: gameLog
   }
 }
 
+export default { createNewGame, gameLog };

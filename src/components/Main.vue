@@ -1,7 +1,7 @@
 <template>
-  <div class="main">
+  <div class="main" v-if="player">
     <div class="levelArea">
-      <Level :level="level" />
+      <Level :level="level"/>
     </div>
     <div class="infoArea">
       <Info :player="player"/>
@@ -12,8 +12,7 @@
     <div class="logArea">
       <Log :gameLog="gameLog"/>
     </div>
-    <GameOver v-if="player.health <= 0" />
-    <Victory v-if="victory" />
+    <GameOver v-if="player.health <= 0 || victory" :win="victory" @confirm="createNewGame()"/>
   </div>
 </template>
 
@@ -24,23 +23,21 @@ import Log from './Log';
 import Game from '../logic/game';
 import Commands from './Commands';
 import GameOver from './GameOver';
-import Victory from './Victory';
-
-const game = Game();
 
 const keyCommands = {
-  'ArrowLeft': () => game.move('left'),
-  'ArrowRight': () => game.move('right'),
-  'ArrowUp': () => game.move('up'),
-  'ArrowDown': () => game.move('down'),
+  'ArrowLeft': (game) => game.move('left'),
+  'ArrowRight': (game) => game.move('right'),
+  'ArrowUp': (game) => game.move('up'),
+  'ArrowDown': (game) => game.move('down'),
 }
 
 export default {
   data:() => {
     return {
-      level: game.level,
-      player: game.player,
-      gameLog: game.gameLog,
+      game: undefined,
+      level: undefined,
+      player: undefined,
+      gameLog: Game.gameLog,
     }
   },
   components: {
@@ -49,10 +46,10 @@ export default {
     Log,
     Commands,
     GameOver,
-    Victory
   },
   mounted() {
     const that = this;
+    this.createNewGame();
     window.addEventListener('keydown', (e) => {
       const {key, shiftKey, ctrlKey, altKey} = e
 
@@ -60,7 +57,7 @@ export default {
 
       if (!modifiers && keyCommands.hasOwnProperty(key) && typeof keyCommands[key] === 'function') {
         const cmd = keyCommands[key]
-        that.changeLevel(cmd());
+        that.changeLevel(cmd(that.game));
       }
     })
   },
@@ -71,14 +68,19 @@ export default {
   },
   methods: {
     move(direction) {
-      const result = game.move(direction)
+      const result = this.game.move(direction)
       this.changeLevel(result);
     },
     changeLevel(result) {
-      if (result.level) {
+      if (result && result.level) {
         this.level = result.level;
-        game.level = result.level;
+        this.game.level = result.level;
       }
+    },
+    createNewGame() {
+      this.game = Game.createNewGame();
+      this.player = this.game.player;
+      this.level = this.game.level;
     }
   }
 }
