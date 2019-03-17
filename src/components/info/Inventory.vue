@@ -129,7 +129,7 @@ export default {
       cursor: pointer;
       font-size: 1.4rem;
       &.selectable {
-        background-color: lightgoldenrodyellow; 
+        background-color: whitesmoke; 
       }
       i {        
         margin-top: 0.1rem;
@@ -137,7 +137,6 @@ export default {
         color: lightgrey;
       }
       &:hover {
-        background-color: whitesmoke;
         i {
           color: darkgrey;
         }
