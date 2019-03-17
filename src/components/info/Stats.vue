@@ -34,8 +34,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .stats {
+  background-color: lemonchiffon;
   padding: 0.2rem 0.4rem 0 0;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   ul {
     text-align: left;
     font-size: small;

@@ -110,28 +110,29 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .inventory {
-  margin-top: 0.5rem;
+  background-color: lemonchiffon;
+  margin-top: 0.2rem;
   .paperdoll {
-    display: grid;
-    grid-template-columns: 40px 40px 40px;
-    grid-template-rows: 40px 40px;
+    display: grid;      
+    grid-template-columns: repeat(3, 1.7rem);
+    grid-template-rows: repeat(3, 1.7rem);
     grid-template-areas: 
       ". head ."
       "left torso right"
       ". feet .";
     div {
       border-radius: 2px;
-      width: 40px;
-      height: 40px;
+      width: 1.5rem;
+      height: 1.5rem;
       padding: 0.3rem 0.2rem;
       text-align: center;
       cursor: pointer;
-      font-size: 30px;
+      font-size: 1.4rem;
       &.selectable {
         background-color: lightgoldenrodyellow; 
       }
       i {        
-        margin-top: 0.3rem;
+        margin-top: 0.1rem;
         font-weight: bolder;
         color: lightgrey;
       }
@@ -178,13 +179,13 @@ export default {
   }
   .backpackSlot {
     display: table-cell;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background-color: lightblue;
     border: 1px solid black;
     text-align: center;
     vertical-align: middle;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     cursor: pointer;
     &:hover {
       background-color: lightcyan;

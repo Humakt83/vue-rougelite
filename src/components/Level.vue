@@ -73,20 +73,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 .level {
   display: grid;
   grid-template-columns: repeat(30, 3.33%);
@@ -96,13 +82,12 @@ a {
   height: calc(75vh - 4px);
 }
 .tile {
-  font-size: calc(75vh / 13 - 15px);
+  font-size: calc(75vh / 13 - 3px);
   margin: 0;
-  padding: 0;
+  padding-top: 0;
   user-select: none;
-  width: calc(75vh / 13 - 13px);
-  height: calc(75vh / 13 - 13px);
-  margin-top: 4px;
+  width: calc(75vh / 13 - 1px);
+  height: calc(75vh / 13 - 1px);
   position: relative;
 }
 .animation {

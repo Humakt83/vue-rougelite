@@ -22,16 +22,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.commands {
+.commands {  
   display: grid;
-  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-columns: repeat(4, 2.5rem);
   grid-template-rows: auto;
   grid-template-areas: 
     ". up ."
     "left down right";
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   i {
-    font-size: 48px;
+    font-size: 2.5rem;
     font-weight: bolder;
     color: blue;
     cursor: pointer;
