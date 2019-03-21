@@ -20,6 +20,18 @@ body {
   overflow: hidden;
 }
 
+@media (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+    position: absolute;
+  }
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

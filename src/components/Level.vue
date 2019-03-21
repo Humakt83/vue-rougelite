@@ -80,6 +80,11 @@ export default {
   align-items: center;
   width: calc(75vw - 4px);
   height: calc(75vh - 4px);
+
+  @media (orientation: portrait) {
+    width: calc(75vh - 4px);
+    height: calc(75vw - 4px);
+  }
 }
 .tile {
   font-size: calc(75vh / 13 - 3px);
@@ -89,6 +94,11 @@ export default {
   width: calc(75vh / 13 - 1px);
   height: calc(75vh / 13 - 1px);
   position: relative;
+  @media (orientation: portrait) {
+    width: calc(75vw / 13 - 1px);
+    height: calc(75vw / 13 - 1px);
+    font-size: calc(75vw / 13 - 3px);
+  }
 }
 .animation {
   position: absolute;

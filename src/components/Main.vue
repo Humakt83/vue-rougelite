@@ -5,8 +5,6 @@
     </div>
     <div class="infoArea">
       <Info :player="player"/>
-    </div>
-    <div class="commandsArea">
       <Commands @move="move"></Commands>
     </div>
     <div class="logArea">
@@ -90,38 +88,44 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .levelArea, .infoArea {
-    width: 75%;
-    min-height: 75%;
+    min-height: 75vh;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 3vh;
     margin: -6px;
   }
 
   .levelArea {
-    width: calc(75% - 4px);
-    min-height: calc(75% - 4px);
+    left: 2vw;
+    width: calc(75vw - 4px);
+    height: calc(75vh - 4px);
+    @media (orientation: portrait) {
+      width: calc(75vw - 4px);
+      height: calc(75vw - 4 px);
+    }
   }
 
   .infoArea {
-    left: 75%;
-    width: 25%;
-  }
-
-  .commandsArea {
-    position: absolute;
-    left: 0;
-    top: 75%;
-    width: 30%;
+    left: 78vw;
+    width: 20vw;
+    @media (orientation: portrait) {
+      width: 20vh;
+      left: 78vh;
+    }
   }
 
   .logArea {
     position: absolute;
-    left: 30%;
-    top: 75%;
-    width: 70%;
-    min-height: 25%;
+    left: 2vw;
+    top: 78vh;
+    width: 70vw;
+    min-height: 20vh;
     margin: -6px;
+    @media (orientation: portrait) {
+      width: 70vh;
+      left: 1vh;
+      top: 79vw;
+      min-height: 19vw;
+    }
   }
 
 </style>

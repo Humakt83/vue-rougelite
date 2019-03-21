@@ -36,7 +36,7 @@ export default {
     color: blue;
     cursor: pointer;
     &:hover {
-      color: cyan;
+      color: rgb(48, 51, 51);
     }
   }
 
