@@ -100,7 +100,7 @@ export default {
     height: calc(75vh - 4px);
     @media (orientation: portrait) {
       width: calc(75vw - 4px);
-      height: calc(75vw - 4 px);
+      height: calc(75vw - 4px);
     }
   }
 
